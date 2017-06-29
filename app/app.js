@@ -1,9 +1,9 @@
-// Include the Main React Dependencies
+// Dependencies
 var React = require("react");
 var ReactDOM = require("react-dom");
 
-// Grabs the Routes
+// Grab routes
 var routes = require("./config/routes");
 
-// Renders the contents according to the route page
+// Render contents
 ReactDOM.render(routes, document.getElementById("app"));
