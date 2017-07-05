@@ -1,0 +1,13 @@
+<?xml version="1.0"?><svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
+ <title>FlowerPower</title>
+
+ <g>
+  <title>Layer 1</title>
+  <g id="layer1">
+   <path d="m458.23999,148.432999c132.449036,-88.049198 -155.192993,-221.199097 -146.290985,-62.403595c15.397003,274.685593 -90.353012,104.278595 156.10498,226.540604c142.476044,70.678986 113.96701,-245.000404 -19.102997,-157.894012c-230.185989,150.678009 -135.483978,-26.108002 -118.136993,248.460999c10.028015,158.727997 269.160004,-23.800995 127.188019,-95.48999c-245.583008,-124.007996 -45.132019,-130.387009 -274.24202,21.919983c-132.448696,88.049011 155.192001,221.199005 146.291,62.404022c-15.397003,-274.686005 90.352997,-104.279022 -156.104996,-226.541016c-142.4765,-70.679192 -113.967098,245 19.102997,157.894012c230.185989,-150.678009 135.483994,26.108002 118.137009,-248.461006c-10.028015,-158.728302 -269.159603,23.801201 -127.188004,95.489998c245.582993,124.007996 45.130997,130.386993 274.241989,-21.919998l0,0z" stroke-width="2.43693" stroke-miterlimit="4" stroke-linejoin="round" stroke-linecap="round" stroke-dashoffset="0" stroke="#ffffff" fill-rule="evenodd" fill="#ff9d00" id="path1317"/>
+   <path d="m378.968994,239a57.9692,57.9692 0 1 1 -115.937988,0a57.9692,57.9692 0 1 1 115.937988,0z" stroke-width="0.79346" stroke-opacity="0.431373" stroke-miterlimit="4" stroke-linejoin="round" stroke-linecap="round" stroke-dashoffset="0" stroke="#ffffff" fill-rule="evenodd" fill="#ff9d00" id="path2119"/>
+   <path d="m263.829987,248.591003a57.9692,57.9692 0 0 1 82.265015,-61.847l-25.095001,52.255997l-57.170013,9.591003z" stroke-width="0.79346" stroke-miterlimit="4" stroke-linejoin="round" stroke-linecap="round" stroke-dashoffset="0" stroke="#ffffff" fill-rule="evenodd" fill="#ff9d00" id="path2161"/>
+  </g>
+  <ellipse ry="80.5" rx="78.5" cy="239.5" cx="318.5" stroke-width="10" stroke-linejoin="round" fill="#ff007f" id="svg_1"/>
+ </g>
+</svg>
