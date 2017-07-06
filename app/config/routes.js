@@ -1,30 +1,27 @@
 var React = require("react");
 
 var router = require("react-router");
-
-// Route/Router component
 var Route = router.Route;
 var Router = router.Router;
-
-//Indexroute (catch-all route)
 var IndexRoute = router.IndexRoute;
-
-//Include browserHistory prop to configure client side routing
 var browserHistory = router.browserHistory;
 
-// require the components here
+// import the high-level components
 var Main = require("../components/Main");
-var Filters = require("../components/children/Filter_parameters");
-var Saved = require("../components/children/Saved_events");
+var Search = require("../components/children/Search");
+var Saved = require("../components/children/Saved");
 
-// Export the routes
+
+// Export Routes
 module.exports = (
     <Router history={browserHistory}>
         <Route path="/" component={Main}>
-            <Route path="Filters" component={Filters} />
+        
+            <Route path="Search" component={Search} />
             <Route path="Saved" component={Saved} />
-
-            <IndexRoute component={Filters} />
+            
+            {/* Indexroute will likely be search once the component is created */}    
+            <IndexRoute component={Main} />
         </Route>
     </Router>
 );
