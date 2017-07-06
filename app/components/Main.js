@@ -14,8 +14,8 @@ var Main = React.createClass({
                             <a className="navbar-brand" href="/">Extravaganza!</a>
                         </div>
                         <ul className="nav navbar-nav">
-                            <li><a href="#">Event Search</a></li>
-                            <li><a href="#">Saved Events</a></li>
+                            <li><Link to="/Search">Event Search</Link></li>
+                            <li><Link to="/Saved">Saved Events</Link></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li><a href="#"><span className="glyphicon glyphicon-user"></span> Login </a></li>
@@ -27,3 +27,5 @@ var Main = React.createClass({
         );
     }
 });
+
+module.exports = Main;
