@@ -21,7 +21,7 @@ module.exports = (
             <Route path="Saved" component={Saved} />
             
             {/* Indexroute will likely be search once the component is created */}    
-            <IndexRoute component={Main} />
+            <IndexRoute component={Search} />
         </Route>
     </Router>
 );

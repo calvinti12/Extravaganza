@@ -22,7 +22,7 @@ var Main = React.createClass({
                         </ul>
                     </div>
                 </nav>
-
+                {this.props.children}
             </div>
         );
     }
