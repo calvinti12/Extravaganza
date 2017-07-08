@@ -11,7 +11,9 @@ var Search = React.createClass({
     getInitialState: function() {
         return {
             searchResults: {},
-            search: ""
+            search: "",
+            startDate: "",
+            endDate: ""
         }
     },
     handleChange: function(event) {
@@ -33,15 +35,32 @@ var Search = React.createClass({
                 {/* Event search parameter*/}
                 <div className="row">
                     <div className="panel panel-default">
-                        <div className="panel-heading">Search for your event...</div>
+                        <div className="panel-heading">Search for events...</div>
                         <div className="panel-body">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     {/* How many inputs do we need?  Can use this input/label as template */}
                                     {/* Inputs include className, id, onChange, value, and placeholder */}
-                                    <label htmlFor="search">Search keyword</label>
-                                    <input className="form-control" id="search" onChange={this.handleChange} 
-                                    value={this.state.search} placeholder="Search event name, artist, keyword" />
+                                    <label htmlFor="search">Select Event type</label>
+                                    {/* <input className="form-control" id="search" onChange={this.handleChange} 
+                                    value={this.state.search} placeholder="Search event name, artist, keyword" /> */}
+                                    <select className="form-control" id="search" onChange={this.handleChange} value={this.state.search}>
+                                        <option>Music</option>
+                                        <option>Sport</option>
+                                        <option>Art</option>
+                                    </select>
+                                    <br />
+
+                                    <div className="input-group">
+                                        <input type="date" className="form-control" id="startDate"
+                                        value={this.state.startDate} onChange={this.handleChange} />
+
+                                        <span className="input-group-addon" />
+
+                                        <input type="date" className="form-control" id="endDate"
+                                        value={this.state.endDate} onChange={this.handleChange} />
+                                        
+                                    </div>
                                     <br />
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </div>
