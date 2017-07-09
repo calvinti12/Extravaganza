@@ -5,30 +5,31 @@ var Link = require("react-router").Link;
 var Event_list = require("./grandchildren/Event_list");
 
 // Include the helpers for making API calls to seatgeek API
-//var helpers = require("../utils/helpers");
+var helpers = require("../../utils/helpers.js");
 
 var Search = React.createClass({
     getInitialState: function() {
         return {
-            searchResults: {},
-            search: "",
-            startDate: "",
-            endDate: ""
+            results: {},
+            searchOptions: ["music", "sport", "theater"],
+            selectedOption: "music",
         }
     },
     handleChange: function(event) {
-        console.log("#" + event.target.id + " input state updated.");
-
-        var newState = {}
-        newState[event.target.id] = event.target.value;
-        this.setState(newState);
-        
+        this.setState({selectedOption: event.target.value})
     },
     handleSubmit: function(event) {
+        console.log("selectedOption" + this.state.selectedOption)
         event.preventDefault();
-        console.log("Submit clicked");
+        debugger
+        helpers.getSeatgeekGenre(this.state.selectedOption)
+            .then(function(data){
+                this.setState({results: {events: data}});
+            }.bind(this))
+        // this.props.updateSearch(this.state.sport)
     },
     render: function() {
+        console.log("render results --search file", this.state.results)
         return (
             <div className="container" id="search-panel">
                 
@@ -44,14 +45,14 @@ var Search = React.createClass({
                                     <label htmlFor="search">Select Event type</label>
                                     {/* <input className="form-control" id="search" onChange={this.handleChange} 
                                     value={this.state.search} placeholder="Search event name, artist, keyword" /> */}
-                                    <select className="form-control" id="search" onChange={this.handleChange} value={this.state.search}>
-                                        <option>Music</option>
-                                        <option>Sport</option>
-                                        <option>Art</option>
+                                    <select className="form-control" id="search" onChange={this.handleChange} value={this.state.selectedOption}>
+                                        <option value={this.state.searchOptions[0]}>Music</option>
+                                        <option value={this.state.searchOptions[1]}>Sport</option>
+                                        <option value={this.state.searchOptions[2]}>Theater & Art</option>
                                     </select>
                                     <br />
 
-                                    <div className="input-group">
+                                    {/*<div className="input-group">
                                         <input type="date" className="form-control" id="startDate"
                                         value={this.state.startDate} onChange={this.handleChange} />
 
@@ -60,7 +61,7 @@ var Search = React.createClass({
                                         <input type="date" className="form-control" id="endDate"
                                         value={this.state.endDate} onChange={this.handleChange} />
                                         
-                                    </div>
+                                    </div>*/}
                                     <br />
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </div>
@@ -79,3 +80,5 @@ var Search = React.createClass({
 });
 
 module.exports = Search;
+
+//   documents/projects/'project 3'/extravaganza
