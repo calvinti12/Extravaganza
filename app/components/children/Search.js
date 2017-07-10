@@ -21,12 +21,10 @@ var Search = React.createClass({
     handleSubmit: function(event) {
         console.log("selectedOption" + this.state.selectedOption)
         event.preventDefault();
-        debugger
         helpers.getSeatgeekGenre(this.state.selectedOption)
             .then(function(data){
                 this.setState({results: {events: data}});
             }.bind(this))
-        // this.props.updateSearch(this.state.sport)
     },
     render: function() {
         console.log("render results --search file", this.state.results)
@@ -72,7 +70,7 @@ var Search = React.createClass({
 
                 {/* include grandchild components here*/}
                 <div className="row">
-                    <Event_list />
+                    <Event_list results={this.state.results} />
                 </div>
             </div>
         );
