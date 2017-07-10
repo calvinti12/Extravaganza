@@ -10,7 +10,7 @@ var helpers = require("../../utils/helpers.js");
 var Search = React.createClass({
     getInitialState: function() {
         return {
-            
+
             showMap: false,
             search: "",
             startDate: "",
@@ -26,9 +26,8 @@ var Search = React.createClass({
         this.setState({selectedOption: event.target.value})
     },
     handleSubmit: function(event) {
-        console.log("selectedOption" + this.state.selectedOption)
+        console.log("selectedOption " + this.state.selectedOption)
         event.preventDefault();
-        debugger
         helpers.getSeatgeekGenre(this.state.selectedOption)
             .then(function(data){
                 this.setState({results: {events: data}});
@@ -36,7 +35,7 @@ var Search = React.createClass({
         // this.props.updateSearch(this.state.sport)
     },
     render: function() {
-        console.log("render results --search file", this.state.results)
+        console.log("render results --search file", this.state.results);
         return (
             <div className="container" id="search-panel">
                 
@@ -79,7 +78,7 @@ var Search = React.createClass({
                 
                 {/* include grandchild components here*/}
                 <div className="row">
-                    <Event_list />
+                    <Event_list results={this.state.results} />
                     { this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
                 </div>
                 {this.props.children}

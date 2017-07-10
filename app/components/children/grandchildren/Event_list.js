@@ -52,7 +52,28 @@ var Event_list = React.createClass({
     
         return markers;
     },
-   
+    renderEvents: function() {
+        if (this.props.results.events) {
+            return this.props.results.events.map(function(event, index) {
+                return (
+                    <div key={index}>
+                        <li className="list-group-item">
+                            <div className="panel">
+                                <span>
+                                    <h4> 
+                                        <em> {event.title} </em> 
+                                        <p className="pull-right"><small> ...at {event.venue.name} </small></p>
+                                    </h4>
+                                </span>
+                                <p className="pull-right"><small> {event.venue.address}, {event.venue.display_location} </small></p>
+                                <button className="btn btn-primary"> Save Event </button>
+                            </div>
+                        </li>
+                    </div>
+                );
+            }.bind(this));
+        }
+    },
     render: function() {
         return (
             <div>
@@ -60,6 +81,9 @@ var Event_list = React.createClass({
                 <div className="panel panel-default">
                     <div className="panel-heading">Event results...</div>
                     <div className="panel-body">
+                        <ul className="list-group">
+                            {this.renderEvents()}
+                        </ul>
                         <button className="btn btn-primary" onClick={this.handleClick}>Show map</button>
                     </div>
                 </div>
@@ -71,7 +95,7 @@ var Event_list = React.createClass({
                         <div id="map"></div>
                     </div>
                 </div>
-                
+
             </div>
         );
     }
