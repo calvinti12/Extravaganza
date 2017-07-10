@@ -1,10 +1,21 @@
 var React = require("react");
 
 //include helpers to update events to database onClick
+var locations = [];
 
 var Event_list = React.createClass({
-    componentDidMount: function() {
-        // console.log("Event map component has mounted");
+    componentDidUpdate: function() {
+        console.log("Event map component has updated");
+        locations = [];
+        for (var i = 0; i < this.props.results.events.length; i++) {
+            var venueLat = this.props.results.events[i].venue.location.lat;
+            var venueLng = this.props.results.events[i].venue.location.lon;
+            var venueLocation = {}
+            venueLocation["lat"] = venueLat;
+            venueLocation["lng"] = venueLng;
+            locations.push(venueLocation);
+        }
+        // initializes the map once the for loop has finished pulling geolocations from props
         this.initMap();
     },
     handleClick: function() {
@@ -15,17 +26,6 @@ var Event_list = React.createClass({
         }
     },
     initMap: function() {
-
-        var locations = [
-            // House of Blues
-            {lat: 41.8882, lng: -87.6291},
-            // Chicago Theater
-            {lat: 41.8855, lng: -87.6276},
-            // The United Center
-            {lat: 41.8807, lng: -87.6742},
-            // The Allstate Arena
-            {lat: 42.0053, lng: -87.8878}
-        ]
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,

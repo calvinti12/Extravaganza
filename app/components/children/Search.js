@@ -78,7 +78,7 @@ var Search = React.createClass({
                 {/* include grandchild components here*/}
                 <div className="row">
                     <Event_list results={this.state.results} />
-                    { this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
+                    {/* <Event_map results={this.state.results} /> */}
                 </div>
                 {this.props.children}
             </div>

@@ -37,15 +37,6 @@ export default Login;
 
 var Main = React.createClass({
 
-    handleLogin: function () {
-        console.log("I'm clicked");
-        if(profile) {
-            console.log(profile);
-        } else {
-            console.log("what?");
-        }
-    },
-
     render: function() {
         return (
             <div className="main-container">
@@ -60,7 +51,7 @@ var Main = React.createClass({
                             <li><Link to="/Saved">Saved Events</Link></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
-                            <li><a href="#"><span className="glyphicon glyphicon-user" onClick={this.handleLogin}></span> Login </a></li>
+                            <li><a href="#"><span className="glyphicon glyphicon-user"></span> Login </a></li>
                             
                             <Login />
                         </ul>
