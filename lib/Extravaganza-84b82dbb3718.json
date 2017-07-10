@@ -1,0 +1,18 @@
+{
+  "type": "service_account",
+  "project_id": "extravaganza-173303",
+  "private_key_id": "84b82dbb3718d2a107cc73e19eb1cb5079117df5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9yAtkpxnENZp1\nOftyJn6l5yt909gKY+ZEVjXGD+AWSlQtxwuUtVjWD+hQqRGQe/1PLeMyLUS+zaEE\nDrQMDX7YJc5MXZ9oxRzUiymbTe0yyhcX6JSnnGynGTUhM9cXzHZOmcV0xlVtRIw3\n8146gZl8QJPWNt1wp/UuPA8HjbE/OuQXlmTJ4yzdbMKTqIFUPz87kmARPUtCppJj\nzd1MUGQDrakBXM/C2FxloIbphpBpAe6u/tXyT6UFtLctnQfCe9DlBSs0BgYCkYvd\nAVJJ9jzWzzCcoLkJHmLHiHkSHuY1VLjAaMkzzabKj2qYwQQeatPNpsrigc7oJ7le\ng12By9jPAgMBAAECggEADiMixiK0hqs/kE/7bSt078LiuILZaxy6AIkzhEeWd9Kd\nprNXJ4LC1V9l/Ow7RLoXypgufoRkxJnozraRrvwqYMugLIwk3dchKKwdM1aAvvHS\n+pL2z+2VInV8Qbbs5Pb0MTK/RM2pe3RJxbk5Yb5ZwqnE2YZIxKWeXA1ZSUTC2WTW\n1Q/J2LwAaslHUoUMVc2ZkMFmMB2wsJ7FfHiCwIbT6L3+PYScYFtxrZ8wVIVGYGfA\n+HYYH1PfkeSxn76miq6yK6mmYBJVYyouNKx8jrTDk/zrbDqew8MOef6KJhNMuyGV\nx0Pu+VdrhVIHKLNS3913v8d0zZiMpjC8Ysicy0TNwQKBgQDf3SSj/gTXoUab0O8s\n5xWWRJHzfF117Vh3Xu+mCmr/yrzsMpJq+dNiwK4AJBao+8LbKd6OAuXzeBFCrvKK\n2i5Ui83bf45CLThC3YeF6BpjcBrGjIvCTcCHA7cjp/ZDTh6rLPzalA4cj/M88A9N\n+nMknHQp/BIRjunylsOfUnCTEQKBgQDZBmTOTD5WjpjGLmlD6pjBfKqxFyKzjBP/\nyo7C5YXurhdHsB9ZF+UXX3mAzwBf8egQDEEThyrTi4b0UIGtL1fS2gMU4niHCDxf\nZXufHlrWh7bbejaTmt1fv1wTaoCVj7qRQRwcEqusYR9075B9BrB+kdRQuG4nVqbU\nwPwRdkXt3wKBgANzMwdb+NMh5yarl6QHg6unLuCjwAT7PWvJiMP0USXUCAlT1jHT\n29AfzA6wf7DnAF/ES2vA265e4VU3wQEmz6P565hAZP7cF4vgQiBsLUvvBFqe++Bo\ntljeU8o24nKzF4Hn1ZXAxl7mUQdVY8b93xxnVNr4yYZ/v1c/v5ALAzUhAoGALmWy\niXQ9Y43q1Xu4n395FuyLJX8XuSD6aZYpfTtKreNkMLxTh12Xaa7MsCARKXHzNfMY\nuo8MNdu/h13qy1ayxO48+GsOb3fwSEjO7A62RuUOz89J+baDG2Qy0CfVw6PNtB4i\nX1ISh7Df48UPs9sJQpX0uSkky5433oY/nZAWlSsCgYEAuzUCOCRGDRLC9AKRLJs3\nTXa0MyNbTnHgyZRYJ77Kku0auyDbbXWZWb4fzLyw/RYqbR2UD1+dxqj7Caelxvzg\niuaeS91n20o6e2PqXz49sWnHCDB+10Ev3gONq2SBR6eGHFr61EuzP8I7QaIK67bL\nfwB4QHYNvpRAFuhTjaTOR+g=\n-----END PRIVATE KEY-----\n",
+  "client_email": "extravaganza-173303@appspot.gserviceaccount.com",
+  "client_id": "110108298473004388987",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/extravaganza-173303%40appspot.gserviceaccount.com"
+}
+
+
+{
+ "Oauth_id": "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com", 
+ "secret": "brK28LnoWhie1R-R9Q-AL5Sv"
+}
