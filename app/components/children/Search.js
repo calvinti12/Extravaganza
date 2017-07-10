@@ -12,7 +12,6 @@ var Search = React.createClass({
         return {
 
             showMap: false,
-            search: "",
             startDate: "",
             endDate: "",
 
