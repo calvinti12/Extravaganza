@@ -11,6 +11,7 @@ var Search = React.createClass({
     getInitialState: function() {
         return {
             searchResults: {},
+            showMap: false,
             search: "",
             startDate: "",
             endDate: ""
@@ -68,11 +69,13 @@ var Search = React.createClass({
                         </div>
                     </div>
                 </div>
-
+                
                 {/* include grandchild components here*/}
                 <div className="row">
                     <Event_list />
+                    { this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
                 </div>
+                {this.props.children}
             </div>
         );
     }
