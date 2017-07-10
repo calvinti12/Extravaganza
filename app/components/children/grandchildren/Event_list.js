@@ -52,6 +52,7 @@ var Event_list = React.createClass({
     
         return markers;
     },
+   
     render: function() {
         return (
             <div>
@@ -70,6 +71,7 @@ var Event_list = React.createClass({
                         <div id="map"></div>
                     </div>
                 </div>
+                
             </div>
         );
     }
