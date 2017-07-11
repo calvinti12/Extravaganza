@@ -4,6 +4,7 @@
     "description": "Find events, and find rides!",
     "main": "server.js",
     "dependencies": {
+        "auth0-js": "^8.8.0",
         "body-parser": "~1.17.1",
         "connect-memcached": "~0.2.0",
         "express": "^4.15.3",
@@ -12,7 +13,9 @@
         "mongoose": "^4.4.20",
         "passport": "^0.3.2",
         "react": "^15.1.0",
+        "react-bootstrap": "^0.31.0",
         "react-dom": "^15.1.0",
+        "react-google-login": "^2.9.2",
         "react-google-login-component": "^0.7.0",
         "react-router": "^2.4.1"
     },
