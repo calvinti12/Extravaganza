@@ -10,16 +10,22 @@ var helpers = require("../../utils/helpers.js");
 var Search = React.createClass({
     getInitialState: function() {
         return {
+
+            showMap: false,
+            startDate: "",
+            endDate: "",
+
             results: {},
             searchOptions: ["music", "sport", "theater"],
             selectedOption: "music",
+
         }
     },
     handleChange: function(event) {
         this.setState({selectedOption: event.target.value})
     },
     handleSubmit: function(event) {
-        console.log("selectedOption" + this.state.selectedOption)
+        console.log("selectedOption " + this.state.selectedOption)
         event.preventDefault();
         helpers.getSeatgeekGenre(this.state.selectedOption)
             .then(function(data){
@@ -27,7 +33,7 @@ var Search = React.createClass({
             }.bind(this))
     },
     render: function() {
-        console.log("render results --search file", this.state.results)
+        console.log("render results --search file", this.state.results);
         return (
             <div className="container" id="search-panel">
                 
@@ -67,11 +73,15 @@ var Search = React.createClass({
                         </div>
                     </div>
                 </div>
-
+                
                 {/* include grandchild components here*/}
                 <div className="row">
                     <Event_list results={this.state.results} />
+
+                    { this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
+
                 </div>
+                {this.props.children}
             </div>
         );
     }

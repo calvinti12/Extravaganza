@@ -15,7 +15,7 @@ var helpers = {
 
   // This will run our query.
   getSeatgeekGenre: function(selectedOption) {
-    debugger
+      
     let seatgeekUrl;
 
 
