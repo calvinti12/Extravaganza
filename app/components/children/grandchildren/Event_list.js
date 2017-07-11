@@ -100,22 +100,6 @@ var Event_list = React.createClass({
             </div>
         );
     },
-    render: function() {
-        // If the user haven't search anything yet, render this HTML
-        if (!this.props.results.events) {
-          return (
-            <li className="list-group-item">
-              <h3>
-                <span>
-                  <em>Pick a category you would like to see...</em>
-                </span>
-              </h3>
-            </li>
-          );
-        }
-        // after searching, return this.renderContainer() which in turn, returns all 
-        return this.renderContainer();
-    }
 });
 
 module.exports = Event_list;
