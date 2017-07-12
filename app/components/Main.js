@@ -1,12 +1,10 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
-// var oauth2 = require('../../lib/oauth2');
 var Link = require("react-router").Link;
 
 // var Saved = require("./children/Saved")
 // var Search = require("./children/Search");
 var Modal = require("./Modal");
-var Address = require("./Address");
 
 import GoogleLogin from 'react-google-login';
 
@@ -93,10 +91,8 @@ responseGoogle: function (googleUser)  {
         console.log("no user");
       }
 
-      console.log(this.state.userFirst);
-
     }.bind(this)); 
-}, 
+  }, 
 
   handleStreet: function(event) { 
     this.setState({userStreet: event.target.value});
@@ -128,6 +124,7 @@ responseGoogle: function (googleUser)  {
     var zip = this.state.userZip; 
 
      console.log(this.state.userStreet);
+     this.toggleModal(); 
   }, 
 
 
@@ -181,7 +178,7 @@ responseGoogle: function (googleUser)  {
                   <div className="panel panel-default">
                       <div className="panel-heading">
                       <img src={this.state.userPicture} />
-                        <h2>Welcome {this.state.userFirst}!  What's Your Address?</h2>  
+                        <h2>Welcome {this.state.userFirst}! We need your pick-up address.</h2>  
                       </div>
                       <div className="panel-body">
                           <form>
@@ -201,30 +198,27 @@ responseGoogle: function (googleUser)  {
                               <label htmlFor="end-year">Zip Code</label>
                               <input type = "text" maxLength = "5" className = "form control" id="zipcode" required value = {this.state.userZip} onChange={this.handleZip} />
                             </div>
-                            <button type = "submit" id="submit" className = "btn btn-info" onClick={this.handleSubmit}>Save</button>
+                            <button type = "submit" id="submit" className = "btn btn-success" onClick={this.handleSubmit}>Save</button>
                             <button type = "submit" id="clear" className = "btn btn-primary" onClick={this.handleClear}>Reset</button>
 
                           </form> 
                       </div>
                     </div>
                 ): (
-                  <h4>Here's some content for the modal </h4>
-                 
-                )}
-
-                <GoogleLogin 
+                  <div>
+                  <h3>We use Google Authentication to get your photo and email.</h3>
+                  <GoogleLogin 
                         clientId = "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com"
                         buttonText = "Login with Google"
                         onSuccess = {this.responseGoogle}
                         onFailure = {this.responseGoogle}
                         responseHandler = {this.responseGoogle}
                     />
+                  </div>
 
-                
+                )}
       
               </Modal>
-
-
 
               {this.props.children}
                

@@ -33,7 +33,7 @@ var Modal = React.createClass({
           {this.props.children}
 
           <div className="footer">
-            <button onClick={this.props.onClose}>
+            <button className = "btn btn-info" onClick={this.props.onClose}>
               Close
             </button>
           </div>
