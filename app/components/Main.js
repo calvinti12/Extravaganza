@@ -19,7 +19,11 @@ getInitialState: function (){
       userEmail: "", 
       userPicture: "", 
       isLoggedIn: false, 
-      modalIsOpen: false
+      modalIsOpen: false, 
+      userStreet: "",
+      userCity: "",
+      userState: "",
+      userZip: ""
       }; 
     }, 
 
@@ -43,7 +47,11 @@ resetState: function () {
       userEmail: "", 
       userPicture: "", 
       isLoggedIn: false, 
-      modalIsOpen: true
+      modalIsOpen: true,
+      userStreet: "",
+      userCity: "",
+      userState: "",
+      userZip: ""
   }); 
 
 },
@@ -101,7 +109,7 @@ responseGoogle: function (googleUser)  {
                         </div>
                         <ul className="nav navbar-nav">
                             <li><Link to="/Search">Event Search</Link></li>
-                            <li><Link to="/Saved">Saved Events</Link></li>
+                           <li><Link to="/Saved">Saved Events</Link></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li className = "navbar-text">{this.state.userFirst} {this.state.userLast}</li>
@@ -114,7 +122,7 @@ responseGoogle: function (googleUser)  {
                               </p></li>
                                 ): (  
                               <li><p>
-                                <a href="#" className="btn btn-infonavbar-btn" onClick={this.resetState}>
+                                <a href="#" className="btn btn-info navbar-btn" onClick={this.resetState}>
                                 <span className="glyphicon glyphicon-user"></span>Logout </a>
                               </p></li>
                               )}
@@ -135,7 +143,10 @@ responseGoogle: function (googleUser)  {
               <Modal show={this.state.modalIsOpen}
                 onClose={this.toggleModal}>
                 <h4>Here's some content for the modal </h4>
-                <img src={this.state.userPicture} />
+
+                {this.state.isLoggedIn ? (
+                  <img src={this.state.userPicture} />
+                )}
 
                 <GoogleLogin 
                         clientId = "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com"
