@@ -1,8 +1,5 @@
 var React = require("react");
 
-// Include our helpers for API calls
-// var helpers = require("../../../utils/helpers");
-
 //include helpers to update events to database onClick
 var locations = [];
 
@@ -19,7 +16,6 @@ var Event_list = React.createClass({
             locations.push(venueLocation);
         }
         // initializes the map once the for loop has finished pulling geolocations from props
-
         this.initMap();
     },
     handleClick: function() {
@@ -62,15 +58,25 @@ var Event_list = React.createClass({
                 return (
                     <div key={index}>
                         <li className="list-group-item">
-                            <div className="panel">
-                                <span>
-                                    <h4> 
-                                        <em> {event.title} </em> 
-                                        <p className="pull-right"><small> ...at {event.venue.name} </small></p>
-                                    </h4>
-                                </span>
-                                <p className="pull-right"><small> {event.venue.address}, {event.venue.display_location} </small></p>
-                                <button className="btn btn-primary"> Save Event </button>
+                            <div className="wrapper">
+                                <div className="row">
+                                    <div className="col-sm-12">
+                                        <h4><em> {event.title} </em></h4> 
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-sm-8">
+                                        <p className="pull-left"> {event.datetime_local}</p>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-sm-8">
+                                        <p className="pull-left"> {event.venue.name} <small>@ {event.venue.address}, {event.venue.display_location} </small></p>
+                                    </div>
+                                    <div className="col-sm-4">
+                                        <button className="btn btn-primary pull-right"> Save Event </button>
+                                    </div>
+                                </div>
                             </div>
                         </li>
                     </div>
@@ -88,7 +94,6 @@ var Event_list = React.createClass({
                         <ul className="list-group">
                             {this.renderEvents()}
                         </ul>
-                        <button className="btn btn-primary" onClick={this.handleClick}>Show map</button>
                     </div>
                 </div>
 
@@ -99,9 +104,10 @@ var Event_list = React.createClass({
                         <div id="map"></div>
                     </div>
                 </div>
+
             </div>
         );
-    },
+    }
 });
 
 module.exports = Event_list;

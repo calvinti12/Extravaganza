@@ -1,5 +1,6 @@
 var React = require("react");
 var Link = require("react-router").Link;
+var moment = require('moment');
 
 // Include any grandchildren components here
 var Event_list = require("./grandchildren/Event_list");
@@ -24,9 +25,17 @@ var Search = React.createClass({
     handleChange: function(event) {
         this.setState({selectedOption: event.target.value})
     },
+    handleStart: function (event) {
+        this.setState({startDate: event.target.value});
+    }, 
+
+    handleEnd: function (event) {
+        this.setState({endDate: event.target.value});
+    }, 
     handleSubmit: function(event) {
         console.log("selectedOption " + this.state.selectedOption)
         event.preventDefault();
+        debugger
         helpers.getSeatgeekGenre(this.state.selectedOption)
             .then(function(data){
                 this.setState({results: {events: data}});
@@ -56,16 +65,16 @@ var Search = React.createClass({
                                     </select>
                                     <br />
 
-                                    {/*<div className="input-group">
+                                    <div className="input-group ">
                                         <input type="date" className="form-control" id="startDate"
-                                        value={this.state.startDate} onChange={this.handleChange} />
+                                        value={this.state.startDate} onChange={this.handleDate} />
 
                                         <span className="input-group-addon" />
 
                                         <input type="date" className="form-control" id="endDate"
-                                        value={this.state.endDate} onChange={this.handleChange} />
+                                        value={this.state.endDate} onChange={this.handleDate} />
                                         
-                                    </div>*/}
+                                    </div>
                                     <br />
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </div>
