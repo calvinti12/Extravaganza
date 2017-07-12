@@ -20,11 +20,19 @@ var Address = React.createClass({
 
   handleClear: function(event) {
     event.preventDefault();
-    this.setState({userStreet: ""});
-    this.setState({userCityt: ""});
-    this.setState({userState: ""});
-    this.setState({userZip: ""});
+    this.setState({userStreet: "",  userCity: "", userState: "", userZip: ""});
+
   },
+
+  handleSubmit: function(event) {
+    event.preventDefault(); 
+    var street = this.state.userStreet.trim();
+    var city= this.state.userCity.trim();
+    var userState = this.state.userState;
+    var zip = this.state.userZip; 
+
+     console.log(this.state.userStreet);
+  }, 
 
   render: function() {
 
@@ -44,22 +52,22 @@ var Address = React.createClass({
                   <form>
                     <div className = "form-group">
                       <label htmlFor="topic">Street</label>
-                      <input type ="text" maxLength = "100" className = "form-control" id="street" required onChange={this.handleStreet} />
+                      <input type ="text" maxLength = "100" className = "form-control" id="street" required value = {this.state.userStreet} onChange={this.handleStreet} />
                     </div>
                     <div className = "form-group">
                       <label htmlFor="record#">City</label>
-                      <input type = "text" maxLength = "50" className = "form control" id="city" onChange={this.handleCity} />
+                      <input type = "text" maxLength = "50" className = "form control" id="city" required value = {this.state.userCity} onChange={this.handleCity} />
                     </div>
                     <div className = "form-group">
                       <label htmlFor="start-year">State</label>
-                      <input type = "text" maxLength = "2" className = "form control" id="state" onChange={this.handleState} />
+                      <input type = "text" maxLength = "2" className = "form control" id="state" required value = {this.state.userState} onChange={this.handleState} />
                     </div>
                     <div className = "form-group">
                       <label htmlFor="end-year">Zip Code</label>
-                      <input type = "text" maxLength = "5" className = "form control" id="zipcode" onChange={this.handleZip} />
+                      <input type = "text" maxLength = "5" className = "form control" id="zipcode" required value = {this.state.userZip} onChange={this.handleZip} />
                     </div>
-                    <button type = "submit" id="submit" className = "btn btn-default" onClick={this.handleSubmit}>Save</button>
-                    <button type = "submit" id="clear" className = "btn btn-default" onClick={this.handleClear}>Reset</button>
+                    <button type = "submit" id="submit" className = "btn btn-info" onClick={this.handleSubmit}>Save</button>
+                    <button type = "submit" id="clear" className = "btn btn-primary" onClick={this.handleClear}>Reset</button>
 
                   </form> 
               </div>
