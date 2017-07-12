@@ -18,7 +18,7 @@ getInitialState: function (){
       userEmail: "", 
       userPicture: "", 
       isLoggedIn: false, 
-      modalIsOpen: false 
+      modalIsOpen: false
       }; 
     }, 
 
@@ -30,8 +30,7 @@ toggleModal: function () {
       modalIsOpen: !this.state.modalIsOpen
     });
 
-
-  console.log(!this.state.modalIsOpen);
+  console.log(this.state.modalIsOpen);
   }, 
 
 responseGoogle: function (googleUser)  {
@@ -82,43 +81,44 @@ responseGoogle: function (googleUser)  {
                 <nav className="navbar navbar-inverse">
                     <div className="container-fluid">
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="/">Extravaganza!</a>
+                            <a className="navbar-brand" href="/">ShuttleExtravaganza!</a>
                         </div>
                         <ul className="nav navbar-nav">
                             <li><Link to="/Search">Event Search</Link></li>
                             <li><Link to="/Saved">Saved Events</Link></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
-                            <li>{this.state.userFirst} {this.state.userLast}</li>
-                            <li><img src={this.state.userPicture} className = "user_picture"/></li>
+                            <li className = "navbar-text">{this.state.userFirst} {this.state.userLast}</li>
+                            <li><img src={this.state.userPicture} className = "nav_picture"/></li>
                               <li><p>
-                                <a href="#" className="btn btn-info btn-lg">
+                                <a href="#" className="btn btn-info btn-md navbar-btn" onClick={this.toggleModal}>
                                   <span className="glyphicon glyphicon-user"></span> Login
                                 </a>
                               </p></li>
-                            <li><Link to="/Modal"><span className ="glyphicon glyphicon-user">Login</span></Link></li>
-                            <li>
-                                <GoogleLogin 
-                                clientId = "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com"
-                                buttonText = "Login"
-                                onSuccess = {this.responseGoogle}
-                                onFailure = {this.responseGoogle}
-                                responseHandler = {this.responseGoogle}
-                                />
-                            </li>
                         </ul>
                     </div>
                 </nav>
 
-                <button onClick={this.toggleModal}>
-                Open the modal
-                </button>
+                <div className = "container-fluid"> 
+                  <div className="jumbotron">
+               
+                  <h1>Welcome to ShuttleExtravaganza!</h1>
+                   <p>Search for rideshare buddies who are going to the same events</p>
+                    
+                  </div>
+                </div>
           
               <Modal show={this.state.modalIsOpen}
                 onClose={this.toggleModal}>
                 <h4>Here's some content for the modal </h4>
-
-                
+                <GoogleLogin 
+                        clientId = "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com"
+                        buttonText = "Login with Google"
+                        onSuccess = {this.responseGoogle}
+                        onFailure = {this.responseGoogle}
+                        responseHandler = {this.responseGoogle}
+                    />
+      
               </Modal>
 
               {this.props.children}
