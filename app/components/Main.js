@@ -3,6 +3,10 @@ var helpers = require("../utils/helpers");
 // var oauth2 = require('../../lib/oauth2');
 var Link = require("react-router").Link;
 
+// var Saved = require("./children/Saved")
+// var Search = require("./children/Search");
+var Modal = require("./Modal");
+
 import GoogleLogin from 'react-google-login';
 
 var Main = React.createClass({
@@ -13,9 +17,22 @@ getInitialState: function (){
       userLast: "",
       userEmail: "", 
       userPicture: "", 
-      isLoggedIn: false
+      isLoggedIn: false, 
+      modalIsOpen: false 
       }; 
     }, 
+
+toggleModal: function () {
+
+  console.log(this.state.modalIsOpen);
+    
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen
+    });
+
+
+  console.log(!this.state.modalIsOpen);
+  }, 
 
 responseGoogle: function (googleUser)  {
   
@@ -74,8 +91,14 @@ responseGoogle: function (googleUser)  {
                         <ul className="nav navbar-nav navbar-right">
                             <li>{this.state.userFirst} {this.state.userLast}</li>
                             <li><img src={this.state.userPicture} className = "user_picture"/></li>
+                              <li><p>
+                                <a href="#" className="btn btn-info btn-lg">
+                                  <span className="glyphicon glyphicon-user"></span> Login
+                                </a>
+                              </p></li>
+                            <li><Link to="/Modal"><span className ="glyphicon glyphicon-user">Login</span></Link></li>
                             <li>
-                           <GoogleLogin 
+                                <GoogleLogin 
                                 clientId = "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com"
                                 buttonText = "Login"
                                 onSuccess = {this.responseGoogle}
@@ -84,12 +107,22 @@ responseGoogle: function (googleUser)  {
                                 />
                             </li>
                         </ul>
-
                     </div>
                 </nav>
 
-                 {this.props.children}
+                <button onClick={this.toggleModal}>
+                Open the modal
+                </button>
+          
+              <Modal show={this.state.modalIsOpen}
+                onClose={this.toggleModal}>
+                <h4>Here's some content for the modal </h4>
 
+                
+              </Modal>
+
+              {this.props.children}
+               
                 
             </div>
         );
