@@ -6,6 +6,7 @@ var Link = require("react-router").Link;
 // var Saved = require("./children/Saved")
 // var Search = require("./children/Search");
 var Modal = require("./Modal");
+var Address = require("./Address");
 
 import GoogleLogin from 'react-google-login';
 
@@ -25,13 +26,27 @@ getInitialState: function (){
 toggleModal: function () {
 
   console.log(this.state.modalIsOpen);
-    
+
     this.setState({
       modalIsOpen: !this.state.modalIsOpen
     });
 
   console.log(this.state.modalIsOpen);
-  }, 
+
+}, 
+
+resetState: function () {
+
+  this.setState({
+      userFirst: "",
+      userLast: "",
+      userEmail: "", 
+      userPicture: "", 
+      isLoggedIn: false, 
+      modalIsOpen: true
+  }); 
+
+},
 
 responseGoogle: function (googleUser)  {
   
@@ -70,6 +85,7 @@ responseGoogle: function (googleUser)  {
         console.log("no user");
       }
 
+      console.log(this.state.userFirst);
 
     }.bind(this)); 
 }, 
@@ -90,11 +106,19 @@ responseGoogle: function (googleUser)  {
                         <ul className="nav navbar-nav navbar-right">
                             <li className = "navbar-text">{this.state.userFirst} {this.state.userLast}</li>
                             <li><img src={this.state.userPicture} className = "nav_picture"/></li>
+
+                               {!this.state.isLoggedIn ? (
                               <li><p>
-                                <a href="#" className="btn btn-info btn-md navbar-btn" onClick={this.toggleModal}>
-                                  <span className="glyphicon glyphicon-user"></span> Login
-                                </a>
+                                <a href="#" className="btn btn-info navbar-btn" onClick={this.toggleModal}>
+                                <span className="glyphicon glyphicon-user"></span>Login </a>
                               </p></li>
+                                ): (  
+                              <li><p>
+                                <a href="#" className="btn btn-infonavbar-btn" onClick={this.resetState}>
+                                <span className="glyphicon glyphicon-user"></span>Logout </a>
+                              </p></li>
+                              )}
+
                         </ul>
                     </div>
                 </nav>
@@ -104,13 +128,15 @@ responseGoogle: function (googleUser)  {
                
                   <h1>Welcome to ShuttleExtravaganza!</h1>
                    <p>Search for rideshare buddies who are going to the same events</p>
-                    
+    
                   </div>
                 </div>
           
               <Modal show={this.state.modalIsOpen}
                 onClose={this.toggleModal}>
                 <h4>Here's some content for the modal </h4>
+                <img src={this.state.userPicture} />
+
                 <GoogleLogin 
                         clientId = "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com"
                         buttonText = "Login with Google"
@@ -120,6 +146,8 @@ responseGoogle: function (googleUser)  {
                     />
       
               </Modal>
+
+
 
               {this.props.children}
                
