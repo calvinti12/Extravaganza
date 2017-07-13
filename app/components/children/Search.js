@@ -39,15 +39,10 @@ var Search = React.createClass({
         if ({showMap: false}) {
             this.setState({showMap: true});
         }
-        helpers.getSeatgeekGenre(this.state.selectedOption)
 
-    
         helpers.getSeatgeekGenre(this.state.selectedOption, this.state.startDate, this.state.endDate)
-
             .then(function(data){
-
                 this.setState({results: {events: data}})
-
             }.bind(this))
 
         this.renderChild();
@@ -107,9 +102,6 @@ var Search = React.createClass({
                 {/* include grandchild components here*/}
                 <div className="row">
                     <Event_list results={this.state.results} />
-
-                    { this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
-
                 </div>
 
                 {this.props.children}

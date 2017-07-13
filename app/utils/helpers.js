@@ -15,6 +15,9 @@ var helpers = {
 
   // This will run our query.
   getSeatgeekGenre: function(selectedOption, startDate, endDate) {
+    console.log("helper selectedOption" + selectedOption)
+    console.log("helper startDate" + startDate)
+    console.log("helper endDate" + endDate)
       
     let seatgeekUrl;
 
