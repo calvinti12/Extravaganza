@@ -27,30 +27,61 @@ var Event_list = React.createClass({
     },
     initMap: function() {
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: {lat: 41.878114, lng: -87.629798}
+        var marker;
+        var map;
+        var markerCluster;
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {lat: -33.890542, lng: 151.274856}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        // var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        // var markers = locations.map(function(location, i) {
+        //     return new google.maps.Marker({
+        //         position: location,
+        //         label: labels[i % labels.length],
+        //         title: "Click to zoom!"
+        //     });
+        // });
+
+        var beaches = [
+          ['Bondi Beach', -33.890542, 151.274856, 4],
+          ['Coogee Beach', -33.923036, 151.259052, 5],
+          ['Cronulla Beach', -34.028249, 151.157507, 3],
+          ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+          ['Maroubra Beach', -33.950198, 151.259302, 1]
+        ];
+
+        for (var i = 0; i < beaches.length; i++) {
+            var beach = beaches[i];
+            marker = new google.maps.Marker({
+              position: {lat: beach[1], lng: beach[2]},
+              map: map,
+              title: beach[0],
+              zIndex: beach[3]
             });
+        }
 
-            // Create an array of alphabetical characters used to label the markers.
-            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        // marker = new google.maps.Marker({
+        //   position: {lat: 41.878114, lng: -87.629798},
+        //   map: map
+        // });
 
-            // Add some markers to the map.
-            // Note: The code uses the JavaScript Array.prototype.map() method to
-            // create an array of markers based on a given "locations" array.
-            // The map() method here has nothing to do with the Google Maps API.
-            var markers = locations.map(function(location, i) {
-                return new google.maps.Marker({
-                    position: location,
-                    label: labels[i % labels.length]
-                });
-            });
+        marker.addListener('click', function(e) {
+            console.log("Marker Clicked!!");
+        });
 
-            // Add a marker clusterer to manage the markers.
-            var markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        // Add a marker clusterer to manage the markers.
+        // markerCluster = new MarkerClusterer(map, marker,
+        //     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     
-        return markers;
     },
     renderEvents: function() {
         if (this.props.results.events) {
