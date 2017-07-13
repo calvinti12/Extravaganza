@@ -1,7 +1,10 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
-// var oauth2 = require('../../lib/oauth2');
 var Link = require("react-router").Link;
+
+// var Saved = require("./children/Saved")
+// var Search = require("./children/Search");
+var Modal = require("./Modal");
 
 import GoogleLogin from 'react-google-login';
 
@@ -13,9 +16,43 @@ getInitialState: function (){
       userLast: "",
       userEmail: "", 
       userPicture: "", 
-      isLoggedIn: false
+      isLoggedIn: false, 
+      modalIsOpen: false, 
+      userStreet: "",
+      userCity: "",
+      userState: "",
+      userZip: ""
       }; 
     }, 
+
+toggleModal: function () {
+
+  console.log(this.state.modalIsOpen);
+
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen
+    });
+
+  console.log(this.state.modalIsOpen);
+
+}, 
+
+resetState: function () {
+
+  this.setState({
+      userFirst: "",
+      userLast: "",
+      userEmail: "", 
+      userPicture: "", 
+      isLoggedIn: false, 
+      modalIsOpen: true,
+      userStreet: "",
+      userCity: "",
+      userState: "",
+      userZip: ""
+  }); 
+
+},
 
 responseGoogle: function (googleUser)  {
   
@@ -54,9 +91,42 @@ responseGoogle: function (googleUser)  {
         console.log("no user");
       }
 
-
     }.bind(this)); 
-}, 
+  }, 
+
+  handleStreet: function(event) { 
+    this.setState({userStreet: event.target.value});
+  },
+
+  handleCity: function (event) {
+    this.setState({userCity: event.target.value});
+  }, 
+
+  handleState: function (event) {
+    this.setState({userState: event.target.value});
+  }, 
+
+  handleZip: function (event) {
+    this.setState({userZip: event.target.value});
+  }, 
+
+  handleClear: function(event) {
+    event.preventDefault();
+    this.setState({userStreet: "",  userCity: "", userState: "", userZip: ""});
+
+  },
+
+  handleSubmit: function(event) {
+    event.preventDefault(); 
+    var street = this.state.userStreet.trim();
+    var city= this.state.userCity.trim();
+    var userState = this.state.userState;
+    var zip = this.state.userZip; 
+
+     console.log(this.state.userStreet);
+     this.toggleModal(); 
+  }, 
+
 
     render: function() {
         return (
@@ -65,31 +135,93 @@ responseGoogle: function (googleUser)  {
                 <nav className="navbar navbar-inverse">
                     <div className="container-fluid">
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="/">Extravaganza!</a>
+                            <a className="navbar-brand" href="/">ShuttleExtravaganza!</a>
                         </div>
                         <ul className="nav navbar-nav">
                             <li><Link to="/Search">Event Search</Link></li>
-                            <li><Link to="/Saved">Saved Events</Link></li>
+                           <li><Link to="/Saved">Saved Events</Link></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
-                            <li>{this.state.userFirst} {this.state.userLast}</li>
-                            <li><img src={this.state.userPicture} className = "user_picture"/></li>
-                            <li>
-                           <GoogleLogin 
-                                clientId = "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com"
-                                buttonText = "Login"
-                                onSuccess = {this.responseGoogle}
-                                onFailure = {this.responseGoogle}
-                                responseHandler = {this.responseGoogle}
-                                />
-                            </li>
-                        </ul>
+                            <li className = "navbar-text">{this.state.userFirst} {this.state.userLast}</li>
+                            <li><img src={this.state.userPicture} className = "nav_picture"/></li>
 
+                               {!this.state.isLoggedIn ? (
+                              <li><p>
+                                <a href="#" className="btn btn-info navbar-btn" onClick={this.toggleModal}>
+                                <span className="glyphicon glyphicon-user"></span>Login </a>
+                              </p></li>
+                                ): (  
+                              <li><p>
+                                <a href="#" className="btn btn-info navbar-btn" onClick={this.resetState}>
+                                <span className="glyphicon glyphicon-user"></span>Logout </a>
+                              </p></li>
+                              )}
+
+                        </ul>
                     </div>
                 </nav>
 
-                 {this.props.children}
+                <div className = "container-fluid"> 
+                  <div className="jumbotron">
+               
+                  <h1>Welcome to ShuttleExtravaganza!</h1>
+                   <p>Search for rideshare buddies who are going to the same events</p>
+    
+                  </div>
+                </div>
+          
+              <Modal show={this.state.modalIsOpen}
+                onClose={this.toggleModal}>
 
+                {this.state.isLoggedIn ? (
+
+                  <div className="panel panel-default">
+                      <div className="panel-heading">
+                      <img src={this.state.userPicture} />
+                        <h2>Welcome {this.state.userFirst}! We need your pick-up address.</h2>  
+                      </div>
+                      <div className="panel-body">
+                          <form>
+                            <div className = "form-group">
+                              <label htmlFor="topic">Street</label>
+                              <input type ="text" maxLength = "100" className = "form-control" id="street" required value = {this.state.userStreet} onChange={this.handleStreet} />
+                            </div>
+                            <div className = "form-group">
+                              <label htmlFor="record#">City</label>
+                              <input type = "text" maxLength = "50" className = "form control" id="city" required value = {this.state.userCity} onChange={this.handleCity} />
+                            </div>
+                            <div className = "form-group">
+                              <label htmlFor="start-year">State</label>
+                              <input type = "text" maxLength = "2" className = "form control" id="state" required value = {this.state.userState} onChange={this.handleState} />
+                            </div>
+                            <div className = "form-group">
+                              <label htmlFor="end-year">Zip Code</label>
+                              <input type = "text" maxLength = "5" className = "form control" id="zipcode" required value = {this.state.userZip} onChange={this.handleZip} />
+                            </div>
+                            <button type = "submit" id="submit" className = "btn btn-success" onClick={this.handleSubmit}>Save</button>
+                            <button type = "submit" id="clear" className = "btn btn-primary" onClick={this.handleClear}>Reset</button>
+
+                          </form> 
+                      </div>
+                    </div>
+                ): (
+                  <div>
+                  <h3>We use Google Authentication to get your photo and email.</h3>
+                  <GoogleLogin 
+                        clientId = "620786879812-2mn1qn400k9nkd1iukoj0e9u91vivk63.apps.googleusercontent.com"
+                        buttonText = "Login with Google"
+                        onSuccess = {this.responseGoogle}
+                        onFailure = {this.responseGoogle}
+                        responseHandler = {this.responseGoogle}
+                    />
+                  </div>
+
+                )}
+      
+              </Modal>
+
+              {this.props.children}
+               
                 
             </div>
         );

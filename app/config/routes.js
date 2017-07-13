@@ -10,6 +10,7 @@ var browserHistory = router.browserHistory;
 var Main = require("../components/Main");
 var Search = require("../components/children/Search");
 var Saved = require("../components/children/Saved");
+var Modal = require("../components/Modal");
 
 
 // Export Routes
@@ -19,9 +20,10 @@ module.exports = (
         
             <Route path="Search" component={Search} />
             <Route path="Saved" component={Saved} />
+            <Route path="Modal" component={Modal} />
             
             {/* Indexroute will likely be search once the component is created */}    
-            <IndexRoute component={Search} />
+            {/*<IndexRoute component={Main} />*/}
         </Route>
     </Router>
 );
