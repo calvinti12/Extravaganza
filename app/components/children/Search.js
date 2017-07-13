@@ -33,13 +33,16 @@ var Search = React.createClass({
         this.setState({endDate: event.target.value});
     }, 
     handleSubmit: function(event) {
-        console.log("selectedOption " + this.state.selectedOption)
+
         event.preventDefault();
-        debugger
-        helpers.getSeatgeekGenre(this.state.selectedOption)
+    
+        helpers.getSeatgeekGenre(this.state.selectedOption, this.state.startDate, this.state.endDate)
             .then(function(data){
-                this.setState({results: {events: data}});
+
+                this.setState({results: {events: data}})
+
             }.bind(this))
+
     },
     render: function() {
         console.log("render results --search file", this.state.results);
@@ -67,12 +70,12 @@ var Search = React.createClass({
 
                                     <div className="input-group ">
                                         <input type="date" className="form-control" id="startDate"
-                                        value={this.state.startDate} onChange={this.handleDate} />
+                                        value={this.state.startDate} onChange={this.handleStart} />
 
                                         <span className="input-group-addon" />
 
                                         <input type="date" className="form-control" id="endDate"
-                                        value={this.state.endDate} onChange={this.handleDate} />
+                                        value={this.state.endDate} onChange={this.handleEnd} />
                                         
                                     </div>
                                     <br />

@@ -31,17 +31,28 @@ var helpers = {
         break;
     default:
         seatgeekUrl = "https://api.seatgeek.com/2/events?&geoip=true&lat=41.8781&lon=87.6298&taxonomies.name=concert&client_id=NzgxMzAwNHwxNDk3MjMzNzgyLjQ5"
-}
+    }
 
     //https://api.seatgeek.com/2/venues?client_id=YOUR_CLIENT_ID&q=? this wil allow us to all endpoint
     //hardcoding chicago 
-    return axios.get(seatgeekUrl)
+    return axios.get(seatgeekUrl + "&datetime_local.gte=" + startDate + "&datetime_local.lt=" + endDate)
       .then(function(results) {
         console.log("Axios Results", results.data.events);
         return results.data.events;
     })
-  }
+  },
+
+
+  getUser: function (id_token) {
+     var url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token; 
+
+    return axios.get(url);
+  } 
+
+
 };
+
+
 
 
 // We export the helpers function
