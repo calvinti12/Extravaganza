@@ -1,0 +1,16 @@
+#event-results {
+    max-height: 430px;
+}
+#ul-event-results {
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+#event-users {
+    max-height: 430px;
+}
+#ul-event-users {
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
