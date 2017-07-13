@@ -27,14 +27,25 @@ var Search = React.createClass({
     handleSubmit: function(event) {
         console.log("selectedOption " + this.state.selectedOption)
         event.preventDefault();
+        if ({showMap: false}) {
+            this.setState({showMap: true});
+        }
         helpers.getSeatgeekGenre(this.state.selectedOption)
             .then(function(data){
                 this.setState({results: {events: data}});
             }.bind(this))
-        // this.props.updateSearch(this.state.sport)
+        this.renderChild();
+    },
+    renderChild: function() {
+        if (this.state.showMap) {
+            return (
+                <div className="row">
+                    <Event_list results={this.state.results} />}
+                </div>
+            );
+        }
     },
     render: function() {
-        console.log("render results --search file", this.state.results);
         return (
             <div className="container" id="search-panel">
                 
@@ -75,12 +86,10 @@ var Search = React.createClass({
                     </div>
                 </div>
                 
-                {/* include grandchild components here*/}
-                <div className="row">
-                    <Event_list results={this.state.results} />
-                    {/* <Event_map results={this.state.results} /> */}
-                </div>
                 {this.props.children}
+                {/* include grandchild components here*/}
+                {this.renderChild()}
+
             </div>
         );
     }
