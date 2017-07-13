@@ -8,13 +8,13 @@ var seatgeek_APIKey = {
   clientSecret: '78ae8e5daf3e418eb42b616061c3f99c64f855d01b9950c581b24933a8a2f019'
 };
 
-
+// https://api.seatgeek.com/2/events?postal_code=60602&range=12mi&datetime_local.gte=2017-07-01&datetime_local.lt=2017-10-01&taxonomies.id=2010000&client_id=YOUR_KEY
 
 // Helper Functions
 var helpers = {
 
   // This will run our query.
-  getSeatgeekGenre: function(selectedOption) {
+  getSeatgeekGenre: function(selectedOption, startDate, endDate) {
       
     let seatgeekUrl;
 
@@ -35,7 +35,7 @@ var helpers = {
 
     //https://api.seatgeek.com/2/venues?client_id=YOUR_CLIENT_ID&q=? this wil allow us to all endpoint
     //hardcoding chicago 
-    return axios.get(seatgeekUrl)
+    return axios.get(seatgeekUrl + "&datetime_local.gte=" + startDate + "&datetime_local.lt=" + endDate)
       .then(function(results) {
         console.log("Axios Results", results.data.events);
         return results.data.events;

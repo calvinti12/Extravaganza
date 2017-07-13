@@ -1,5 +1,6 @@
 var React = require("react");
 var Link = require("react-router").Link;
+var moment = require('moment');
 
 // Include any grandchildren components here
 var Event_list = require("./grandchildren/Event_list");
@@ -24,16 +25,31 @@ var Search = React.createClass({
     handleChange: function(event) {
         this.setState({selectedOption: event.target.value})
     },
+    handleStart: function (event) {
+        this.setState({startDate: event.target.value});
+    }, 
+
+    handleEnd: function (event) {
+        this.setState({endDate: event.target.value});
+    }, 
     handleSubmit: function(event) {
-        console.log("selectedOption " + this.state.selectedOption)
+
         event.preventDefault();
+
         if ({showMap: false}) {
             this.setState({showMap: true});
         }
         helpers.getSeatgeekGenre(this.state.selectedOption)
+
+    
+        helpers.getSeatgeekGenre(this.state.selectedOption, this.state.startDate, this.state.endDate)
+
             .then(function(data){
-                this.setState({results: {events: data}});
+
+                this.setState({results: {events: data}})
+
             }.bind(this))
+
         this.renderChild();
     },
     renderChild: function() {
@@ -44,6 +60,7 @@ var Search = React.createClass({
                 </div>
             );
         }
+
     },
     render: function() {
         return (
@@ -68,16 +85,16 @@ var Search = React.createClass({
                                     </select>
                                     <br />
 
-                                    {/*<div className="input-group">
+                                    <div className="input-group ">
                                         <input type="date" className="form-control" id="startDate"
-                                        value={this.state.startDate} onChange={this.handleChange} />
+                                        value={this.state.startDate} onChange={this.handleStart} />
 
                                         <span className="input-group-addon" />
 
                                         <input type="date" className="form-control" id="endDate"
-                                        value={this.state.endDate} onChange={this.handleChange} />
+                                        value={this.state.endDate} onChange={this.handleEnd} />
                                         
-                                    </div>*/}
+                                    </div>
                                     <br />
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </div>
@@ -86,6 +103,15 @@ var Search = React.createClass({
                     </div>
                 </div>
                 
+
+                {/* include grandchild components here*/}
+                <div className="row">
+                    <Event_list results={this.state.results} />
+
+                    { this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
+
+                </div>
+
                 {this.props.children}
                 {/* include grandchild components here*/}
                 {this.renderChild()}
