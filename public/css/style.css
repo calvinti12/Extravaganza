@@ -1,11 +1,26 @@
 .nav_picture {
-	border-radius: 50%;
+    border-radius: 50%;
     width: 40%;
     height: 40%;
     margin: 7px;
 }
-
- #map {
-   height: 400px;
-   width: 100%;
+#map {
+    height: 400px;
+    width: 100%;
+}
+#event-results {
+    max-height: 430px;
+}
+#ul-event-results {
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+#event-users {
+    max-height: 430px;
+}
+#ul-event-users {
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
