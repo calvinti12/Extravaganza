@@ -3,8 +3,8 @@ var helpers = require("../utils/helpers");
 var geolocator = require("geolocator");
 var Link = require("react-router").Link;
 
-// var Saved = require("./children/Saved")
-// var Search = require("./children/Search");
+var Saved = require("./children/Saved")
+var Search = require("./children/Search");
 var Modal = require("./Modal");
 
 import GoogleLogin from 'react-google-login';
@@ -246,7 +246,14 @@ responseGoogle: function (googleUser)  {
       
               </Modal>
 
-              {this.props.children}
+              {React.cloneElement (
+                this.props.children, {
+                  logIn: this.state.isLoggedIn, 
+                  first: this.state.userFirst,
+                  last: this.state.userLast,
+                  email: this.state.userEmail
+                })
+              }
                
                 
             </div>

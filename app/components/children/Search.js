@@ -64,12 +64,14 @@ var Search = React.createClass({
     },
     render: function() {
         return (
+           
             <div className="container" id="search-panel">
-                
+            
                 {/* Event search parameter*/}
                 <div className="row">
+                    {this.props.logIn ? (
                     <div className="panel panel-default">
-                        <div className="panel-heading">Search for events...</div>
+                        <div className="panel-heading">Search for events {this.props.first}!</div>
                         <div className="panel-body">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
@@ -101,8 +103,10 @@ var Search = React.createClass({
                             </form>
                         </div>
                     </div>
+                    ):(
+                    <div>You're not logged IN</div>
+                    )}
                 </div>
-                
 
                 {/* include grandchild components here*/}
                 <div className="row">
@@ -117,6 +121,8 @@ var Search = React.createClass({
                 {this.renderChild()}
 
             </div>
+            
+            
         );
     }
 });

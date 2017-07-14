@@ -20,10 +20,9 @@ module.exports = (
         
             <Route path="Search" component={Search} />
             <Route path="Saved" component={Saved} />
-            <Route path="Modal" component={Modal} />
             
             {/* Indexroute will likely be search once the component is created */}    
-            {/*<IndexRoute component={Main} />*/}
+           <IndexRoute component={Search} />
         </Route>
     </Router>
 );
