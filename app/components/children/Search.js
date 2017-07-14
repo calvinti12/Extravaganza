@@ -87,12 +87,12 @@ var Search = React.createClass({
                                     </select>
                                     <br />
 
-                                    <div className="input-group ">
+                                    <div>
+                                        <label htmlFor = "startDate">Search Start Date</label>
                                         <input type="date" className="form-control" id="startDate"
                                         value={this.state.startDate} onChange={this.handleStart} />
-
-                                        <span className="input-group-addon" />
-
+                                      
+                                        <label htmlFor = "endDate">Search End Date</label>
                                         <input type="date" className="form-control" id="endDate"
                                         value={this.state.endDate} onChange={this.handleEnd} />
                                         
@@ -109,16 +109,18 @@ var Search = React.createClass({
 
                 </div>
 
-                {/* include grandchild components here*/}
+                 {/* {this.props.children}
+                 {/* include grandchild components here}
+                {this.renderChild()}*/}
+
                 <div className="row">
                     <Event_list login= {this.props.logIn} results={this.state.results} />
-                        {this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
+                        
                 </div>
 
                  
-                {this.props.children}
-                {/* include grandchild components here*/}
-              {this.renderChild()}
+                
+               
 
             </div>
             
