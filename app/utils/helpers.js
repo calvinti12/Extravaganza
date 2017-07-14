@@ -1,6 +1,8 @@
 // Include the Axios library for HTTP requests
 var axios = require("axios");
 
+var path = require("path");
+
 //SeatGeek Api url and key
 var seatgeek_APIKey = {
   Url: 'https://api.seatgeek.com/2/',
@@ -52,7 +54,6 @@ var helpers = {
     return axios.get(url);
   } 
 
-
 };
 
 
@@ -61,7 +62,3 @@ var helpers = {
 // We export the helpers function
 module.exports = helpers;
 
-//        "performers.slug": artistName,
-        // "q": event,
-        // "venue": venue,
-        // "taxonomies": taxonomy

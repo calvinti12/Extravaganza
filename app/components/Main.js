@@ -1,5 +1,6 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
+var geolocator = require("geolocator");
 var Link = require("react-router").Link;
 
 // var Saved = require("./children/Saved")
@@ -15,13 +16,15 @@ getInitialState: function (){
       userFirst: "",
       userLast: "",
       userEmail: "", 
-      userPicture: "", 
-      isLoggedIn: false, 
-      modalIsOpen: false, 
+      userPicture: "",       
       userStreet: "",
       userCity: "",
       userState: "",
-      userZip: ""
+      userZip: "",
+      userLat: "",
+      userLon: "",
+      isLoggedIn: false, 
+      modalIsOpen: false, 
       }; 
     }, 
 
@@ -44,12 +47,12 @@ resetState: function () {
       userLast: "",
       userEmail: "", 
       userPicture: "", 
-      isLoggedIn: false, 
-      modalIsOpen: true,
       userStreet: "",
       userCity: "",
       userState: "",
-      userZip: ""
+      userZip: "",
+      isLoggedIn: false, 
+      modalIsOpen: true
   }); 
 
 },
@@ -118,15 +121,38 @@ responseGoogle: function (googleUser)  {
 
   handleSubmit: function(event) {
     event.preventDefault(); 
-    var street = this.state.userStreet.trim();
-    var city= this.state.userCity.trim();
-    var userState = this.state.userState;
-    var zip = this.state.userZip; 
+
+    var userAddress = {
+        street: this.state.userStreet.trim(),
+        city: this.state.userCity.trim(),
+        userState: this.state.userState,
+        zip: this.state.userZip 
+    }
 
      console.log(this.state.userStreet);
      this.toggleModal(); 
-  }, 
 
+    geolocator.config({
+        language: "en",
+        google: {
+            version: "3",
+            key: "AIzaSyBBqE9YeYp_gFyoVxtEYJ9deixbjERVnys"
+        }
+    });
+
+    var concatAddress = `${userAddress.street} ${userAddress.city}, ${userAddress.userState} ${userAddress.zip}`;
+
+      geolocator.geocode(concatAddress, function (err, userLocation, ) {
+
+          console.log(err || userLocation);
+ 
+          this.setState({userLat: userLocation.coords.latitude, userLon: userLocation.coords.longitude});
+          console.log(this.state.userLat); 
+          console.log(this.state.userLon); 
+          
+      }.bind(this));  
+    
+  }, 
 
     render: function() {
         return (
