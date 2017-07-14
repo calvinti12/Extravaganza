@@ -3,6 +3,8 @@ var helpers = require("../utils/helpers");
 var geolocator = require("geolocator");
 var Link = require("react-router").Link;
 
+var bus = require('../../public/img/flowerpower.svg');
+
 // var Saved = require("./children/Saved")
 // var Search = require("./children/Search");
 var Modal = require("./Modal");
@@ -191,6 +193,7 @@ responseGoogle: function (googleUser)  {
                   <div className="jumbotron">
                
                   <h1>Welcome to ShuttleExtravaganza!</h1>
+                   <img src={bus}/>
                    <p>Search for rideshare buddies who are going to the same events</p>
     
                   </div>

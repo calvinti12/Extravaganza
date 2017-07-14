@@ -11,12 +11,21 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.(jpg|png|svg)$/,
+        use:  {
+          loader: "file-loader",
+          query: {
+            name: "./public/img/[name].[ext]"
+          }
+        }
+      },
+      {
         // Only working with files that in in a .js or .jsx extension
-        test: /\.jsx?$/,
+        test: /\.jsx?$/, 
         // Webpack will only process files in our app folder. This avoids processing
         // node modules and server files unnecessarily
-        include: /app/,
-        loader: "babel-loader",
+        include: /app/, 
+        loader: "babel-loader", 
         query: {
           // These are the specific transformations we'll be using.
           presets: ["react", "es2015"]
