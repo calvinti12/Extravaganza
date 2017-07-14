@@ -1,43 +1,46 @@
 {
-    "name": "extravaganza",
-    "version": "1.0.0",
-    "description": "Find events, and find rides!",
-    "main": "server.js",
-    "dependencies": {
-        "auth0-js": "^8.8.0",
-        "body-parser": "~1.17.1",
-        "connect-memcached": "~0.2.0",
-        "express": "^4.15.3",
-        "express-session": "~1.15.2",
-        "mongodb": "^2.2.19",
-        "mongoose": "^4.4.20",
-        "passport": "^0.3.2",
-        "react": "^15.1.0",
-        "react-bootstrap": "^0.31.0",
-        "react-dom": "^15.1.0",
-        "react-google-login": "^2.9.2",
-        "react-router": "^2.4.1"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "webpack -w & node server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/linhng15/Extravaganza.git"
-    },
-    "devDependencies": {
-        "axios": "^0.12.0",
-        "babel-core": "^6.25.0",
-        "babel-loader": "^6.2.10",
-        "babel-preset-es2015": "^6.24.1",
-        "babel-preset-react": "^6.24.1",
-        "webpack": "^2.6.1"
-    },
-    "author": "Michael, Caryn, Linh, Jared",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/linhng15/Extravaganza/issues"
-    },
-    "homepage": "https://github.com/linhng15/Extravaganza#readme"
+  "name": "extravaganza",
+  "version": "1.0.0",
+  "description": "Find events, and find rides!",
+  "main": "server.js",
+  "dependencies": {
+    "auth0-js": "^8.8.0",
+    "body-parser": "~1.17.1",
+    "connect-memcached": "~0.2.0",
+    "express": "^4.15.3",
+    "express-session": "~1.15.2",
+    "geolocator": "^2.1.1",
+    "mongodb": "^2.2.19",
+    "mongoose": "^4.4.20",
+    "passport": "^0.3.2",
+    "path": "^0.12.7",
+    "react": "^15.1.0",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.1.0",
+    "react-google-login": "^2.9.2",
+    "react-router": "^2.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack -w & node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linhng15/Extravaganza.git"
+  },
+  "devDependencies": {
+    "axios": "^0.12.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "json-loader": "^0.5.4",
+    "webpack": "^2.6.1"
+  },
+  "author": "Michael, Caryn, Linh, Jared",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linhng15/Extravaganza/issues"
+  },
+  "homepage": "https://github.com/linhng15/Extravaganza#readme"
 }
