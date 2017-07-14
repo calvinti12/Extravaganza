@@ -251,10 +251,12 @@ responseGoogle: function (googleUser)  {
                   logIn: this.state.isLoggedIn, 
                   first: this.state.userFirst,
                   last: this.state.userLast,
-                  email: this.state.userEmail
+                  email: this.state.userEmail,
+                  lat: this.state.userLat,
+                  lon: this.state.userLon
                 })
               }
-               
+              
                 
             </div>
         );

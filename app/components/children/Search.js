@@ -102,23 +102,23 @@ var Search = React.createClass({
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> 
                     ):(
-                    <div>You're not logged IN</div>
+                    <div><h3>Log in to continue....</h3></div>
                     )}
+
                 </div>
 
                 {/* include grandchild components here*/}
                 <div className="row">
-                    <Event_list results={this.state.results} />
-
-                    { this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
-
+                    <Event_list login= {this.props.logIn} results={this.state.results} />
+                        {this.state.showMap ? <Event_map showMap={this.state.showMap} /> : null }
                 </div>
 
+                 
                 {this.props.children}
                 {/* include grandchild components here*/}
-                {this.renderChild()}
+              {this.renderChild()}
 
             </div>
             

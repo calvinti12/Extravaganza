@@ -100,7 +100,7 @@ var Event_list = React.createClass({
         }
     },
     render: function() {      
-        return (
+        return ( 
             <div className="row">
                 {/* Event results panel*/}
                 <div className="col-lg-5">
@@ -113,6 +113,7 @@ var Event_list = React.createClass({
                         </div>
                     </div>
                 </div>
+                
                 {/* Event map panel*/}
                 <div className="col-lg-7">
                     <div className="panel panel-default" id="map-panel">
