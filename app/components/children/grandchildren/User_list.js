@@ -1,11 +1,18 @@
 var React = require("react");
 
 // Include our helpers for API calls
-// var helpers = require("../../utils/helpers.js");
+var helpers = require("../../../utils/helpers.js");
 
 var User_list = React.createClass({
+    getInitialState: function() {
+        return { userEvents: "" };
+    },
     componentDidMount: function() {
         console.log("User_list component mounted");
+        helpers.getEvents().then(function(eventResults) {
+            this.setState({ userEvents: eventResults.data });
+            console.log("eventResults in user_list mount", eventResults.data);
+        }.bind(this));
     },
     render: function() {
         return (

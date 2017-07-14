@@ -23,7 +23,7 @@ module.exports = (
             <Route path="Modal" component={Modal} />
             
             {/* Indexroute will likely be search once the component is created */}    
-            {/*<IndexRoute component={Main} />*/}
+            <IndexRoute component={Main} />
         </Route>
     </Router>
 );
