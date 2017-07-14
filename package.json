@@ -10,6 +10,7 @@
     "express": "^4.15.3",
     "express-session": "~1.15.2",
     "geolocator": "^2.1.1",
+    "moment": "^2.18.1",
     "mongodb": "^2.2.19",
     "mongoose": "^4.4.20",
     "passport": "^0.3.2",
