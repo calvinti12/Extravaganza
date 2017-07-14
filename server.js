@@ -62,14 +62,9 @@ db.once("open", function() {
 // -------------------------------------------------------------
 // ROUTES
 
-
-app.get("*", function(req, res) {
-  res.sendFile(__dirname + "/public/index.html");
-});
-
 // Route to get saved events
 app.get("/api/events", function(req, res) {
-  console.log("api events");
+  console.log("api events get request in server.js");
   Event.find({}).exec(function(err, doc) {
     if(err) {
       console.log(err);
@@ -91,6 +86,11 @@ app.post("/api/events", function(req, res) {
       res.send(doc);
     }
   });
+});
+
+// any non API GET routes will be directed to our React app and handled by React router
+app.get("*", function(req, res) {
+  res.sendFile(__dirname + "/public/index.html");
 });
 // ----------------------------------------------------
 

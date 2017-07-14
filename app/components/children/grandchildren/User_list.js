@@ -14,6 +14,20 @@ var User_list = React.createClass({
             console.log("eventResults in user_list mount", eventResults.data);
         }.bind(this));
     },
+    renderEvents: function() {
+        
+        if (this.state.userEvents.length) {
+            return this.state.userEvents.map(function(event, index) {
+                return (
+                    <div key={index}>
+                        <li className="list-group-item">
+                            <p>{event.eventName}</p>
+                        </li>
+                    </div>
+                );
+            }.bind(this));
+        }
+    },
     render: function() {
         return (
             <div className="container">
@@ -24,7 +38,7 @@ var User_list = React.createClass({
                         </div>
                         <div className="panel-body">
                             {/* User's saved events render here */}
-
+                            {this.renderEvents()}
                         </div>
                     </div>
                 </div>

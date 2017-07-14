@@ -42,8 +42,8 @@ var helpers = {
     })
   },
   getEvents: function() {
-    console.log("getEvents helper method called");
-    return axios.get("/api/saved").then(
+    //console.log("getEvents helper method called");
+    return axios.get("/api/events").then(
       function(results) {
         console.log("axios getEvent results", results);
         return results;
