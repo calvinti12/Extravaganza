@@ -16,6 +16,7 @@ var MemcachedStore = require('connect-memcached')(session);
 
 // Require Schema
 var Event = require("./models/Event");
+var User = require("./models/User");
 
 // Create Instance of Express
 var app = express();
@@ -61,6 +62,23 @@ db.once("open", function() {
 
 // -------------------------------------------------------------
 // ROUTES
+
+// Route to save a user to the database
+  app.post("/api/user", function (req,res) {
+    
+      var newUser = new User(req.body);
+      console.log("I made it to the post route!");
+
+      newUser.save(function(error, doc) {
+
+        if (error) {
+            console.log(error);
+        } else {
+              console.log("new User to database id:" + doc);
+          }
+        }); 
+   
+    });
 
 // Route to get saved events
 app.get("/api/events", function(req, res) {

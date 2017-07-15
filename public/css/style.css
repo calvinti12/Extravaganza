@@ -3,6 +3,8 @@
     width: 40%;
     height: 40%;
     margin: 7px;
+    max-width: 30px: 
+    max-height: 30px;
 }
 #map {
     height: 400px;

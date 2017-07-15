@@ -76,7 +76,13 @@ var helpers = {
      var url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token; 
 
     return axios.get(url);
-  } 
+  }, 
+
+  saveUser: function(user) {
+      console.log("I made it this far!");
+   
+    return axios.post("/api/user", user);
+  }
 
 };
 
