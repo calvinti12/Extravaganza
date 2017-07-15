@@ -116,7 +116,7 @@ handleUser: function() {
 
   helpers.saveUser(user) 
     .then (function(res) {
-       console.log("I'm the saved article" + res);
+       console.log("I'm the saved user" + res);
    }); 
 
 },
