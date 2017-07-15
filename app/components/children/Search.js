@@ -86,7 +86,7 @@ var Search = React.createClass({
                                         <label htmlFor = "startDate">Search Start Date</label>
                                         <input type="date" className="form-control" id="startDate"
                                         value={this.state.startDate} onChange={this.handleStart} />
-                                      
+
                                         <label htmlFor = "endDate">Search End Date</label>
                                         <input type="date" className="form-control" id="endDate"
                                         value={this.state.endDate} onChange={this.handleEnd} />
