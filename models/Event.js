@@ -22,7 +22,6 @@ var SeatgeekSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   }]
-
 });
 
 var Event = mongoose.model("Event", SeatgeekSchema);
