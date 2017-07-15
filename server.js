@@ -15,7 +15,7 @@ var MemcachedStore = require('connect-memcached')(session);
 // -------------------------------------------------------
 
 // Require Schema
-
+var Event = require("./models/Event");
 
 // Create Instance of Express
 var app = express();
@@ -62,12 +62,36 @@ db.once("open", function() {
 // -------------------------------------------------------------
 // ROUTES
 
+// Route to get saved events
+app.get("/api/events", function(req, res) {
+  console.log("api events get request in server.js");
+  Event.find({}).exec(function(err, doc) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log("api events get");
+      res.send(doc);
+    }
+  });
+});
 
+// Route to save an event to database
+app.post("/api/events", function(req, res) {
+  var newEvent = new Event(req.body);
+  console.log("save event post route ", req.body);
+  newEvent.save(function(err, doc) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(doc);
+    }
+  });
+});
+
+// any non API GET routes will be directed to our React app and handled by React router
 app.get("*", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
-
-
 // ----------------------------------------------------
 
 // Starting our express server
