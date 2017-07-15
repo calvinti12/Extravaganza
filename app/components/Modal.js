@@ -21,10 +21,11 @@ var Modal = React.createClass({
     const modalStyle = {
       backgroundColor: '#ffffff',
       borderRadius: 5,
-      maxWidth: 1200,
-      minHeight: 500,
+      maxWidth: 1000,
+      minHeight: 300,
       margin: '0 auto',
-      padding: 30
+      padding: 30,
+      zIndex: 5000
     };
 
     return (

@@ -20,7 +20,7 @@ var Event = require("./models/Event");
 // Create Instance of Express
 var app = express();
 // Sets an initial port. We'll use this later in our listener
-var PORT = process.env.PORT || 3800;
+var PORT = process.env.PORT ||3800;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
