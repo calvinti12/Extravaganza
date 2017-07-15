@@ -84,6 +84,11 @@ var Event_list = React.createClass({
                                 </div>
                                 <div className="row">
                                     <div className="col-sm-8">
+                                        <p className="pull-left"> {event.datetime_local}</p>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-sm-8">
                                         <p className="pull-left"> {event.venue.name} <small>@ {event.venue.address}, {event.venue.display_location} </small></p>
                                     </div>
                                     <div className="col-sm-4">
