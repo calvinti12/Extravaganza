@@ -4,9 +4,9 @@ var geolocator = require("geolocator");
 var Link = require("react-router").Link;
 
 
+var Saved = require("./children/Saved")
+var Search = require("./children/Search");
 
-// var Saved = require("./children/Saved")
-// var Search = require("./children/Search");
 var Modal = require("./Modal");
 
 import GoogleLogin from 'react-google-login';
@@ -197,8 +197,20 @@ responseGoogle: function (googleUser)  {
     
                   </div>
                 </div>
-          
+
+              {React.cloneElement (
+                this.props.children, {
+                  logIn: this.state.isLoggedIn, 
+                  first: this.state.userFirst,
+                  last: this.state.userLast,
+                  email: this.state.userEmail,
+                  lat: this.state.userLat,
+                  lon: this.state.userLon
+                })
+              }
+                        
               <Modal show={this.state.modalIsOpen}
+                data={this.state}
                 onClose={this.toggleModal}>
 
                 {this.state.isLoggedIn ? (
@@ -248,8 +260,6 @@ responseGoogle: function (googleUser)  {
       
               </Modal>
 
-              {this.props.children}
-               
                 
             </div>
         );

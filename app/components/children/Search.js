@@ -59,12 +59,14 @@ var Search = React.createClass({
     },
     render: function() {
         return (
+           
             <div className="container" id="search-panel">
-                
+            
                 {/* Event search parameter*/}
                 <div className="row">
+                    {this.props.logIn ? (
                     <div className="panel panel-default">
-                        <div className="panel-heading">Search for events...</div>
+                        <div className="panel-heading">Search for events {this.props.first}!</div>
                         <div className="panel-body">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
@@ -80,12 +82,12 @@ var Search = React.createClass({
                                     </select>
                                     <br />
 
-                                    <div className="input-group ">
+                                    <div>
+                                        <label htmlFor = "startDate">Search Start Date</label>
                                         <input type="date" className="form-control" id="startDate"
                                         value={this.state.startDate} onChange={this.handleStart} />
-
-                                        <span className="input-group-addon" />
-
+                                      
+                                        <label htmlFor = "endDate">Search End Date</label>
                                         <input type="date" className="form-control" id="endDate"
                                         value={this.state.endDate} onChange={this.handleEnd} />
                                         
@@ -95,20 +97,28 @@ var Search = React.createClass({
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> 
+                    ):(
+                    <div><h3>Log in to continue....</h3></div>
+                    )}
                 </div>
-                
 
-                {/* include grandchild components here*/}
+                 {/* {this.props.children}
+                 {/* include grandchild components here}
+                {this.renderChild()}*/}
+
                 <div className="row">
-                    <Event_list results={this.state.results} />
+                    <Event_list login= {this.props.logIn} results={this.state.results} />
+
                 </div>
 
-                {this.props.children}
-                {/* include grandchild components here*/}
-                {this.renderChild()}
+                 
+                
+               
 
             </div>
+            
+            
         );
     }
 });
