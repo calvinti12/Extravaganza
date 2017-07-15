@@ -18,7 +18,7 @@ var Saved = React.createClass({
                     <User_list />
                 </div>
                 <div className="row">
-                        <Users_map  />
+                    <Users_map  />
                 </div>
             </div>
         );

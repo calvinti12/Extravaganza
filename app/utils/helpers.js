@@ -66,6 +66,7 @@ var helpers = {
       venueLocation: location 
     };
     return axios.post("/api/events", newEvent).then(
+      debugger
       function(response) {
         console.log("postSaved axios results", newEvent);
         return response.data._id;
