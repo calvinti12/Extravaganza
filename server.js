@@ -67,7 +67,6 @@ db.once("open", function() {
   app.post("/api/user", function (req,res) {
     
       var newUser = new User(req.body);
-      console.log("I made it to the post route!");
 
       newUser.save(function(error, doc) {
 

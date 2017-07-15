@@ -112,7 +112,7 @@ handleUser: function() {
     lon: this.state.userLon
   }
 
-  console.log(user);
+  console.log("this is my user!!" + user);
 
   helpers.saveUser(user) 
     .then (function(res) {
