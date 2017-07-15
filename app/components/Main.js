@@ -193,7 +193,8 @@ responseGoogle: function (googleUser)  {
                   <div className="jumbotron">
                
                   <h1>Welcome to ShuttleExtravaganza!</h1>
-                   <p>Search for rideshare buddies who are going to the same events</p>
+                  <p>Search for rideshare buddies who are going to the same events</p>
+                  <img src="/img/mysteryMachine.png"/>
     
                   </div>
                 </div>
