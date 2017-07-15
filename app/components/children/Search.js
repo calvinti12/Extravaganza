@@ -113,11 +113,12 @@ var Search = React.createClass({
                  {/* include grandchild components here}
                 {this.renderChild()}*/}
 
+                {/*
                 <div className="row">
                     <Event_list login= {this.props.logIn} results={this.state.results} />
                         
                 </div>
-
+                */}
                  
                 
                
