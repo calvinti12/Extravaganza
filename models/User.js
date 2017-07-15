@@ -9,7 +9,7 @@ var User = new Schema({
     required: true
   },
   last: {
-    type: Date,
+    type: String,
     required: true
   },
   email: {
@@ -17,7 +17,7 @@ var User = new Schema({
     required: true
   },
   picture: {
-    type: String,
+    type: String, 
     required: true
   },
   street: {
@@ -40,10 +40,14 @@ var User = new Schema({
   }, 
   loggedIn: {
     type: Boolean 
-  }
- 
+  }, 
+  events: [{
+    type: Schema.Types.ObjectId,
+    ref: "Event"
+  }] 
+
 });
 
-var User = mongoose.model("User", UserSchema);
+var User = mongoose.model("User", User);
 
 module.exports = User;

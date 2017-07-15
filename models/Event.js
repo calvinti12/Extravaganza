@@ -17,7 +17,7 @@ var SeatgeekSchema = new Schema({
   },
   venueLocation: {
     type: String
-  },
+  }
 
 });
 
