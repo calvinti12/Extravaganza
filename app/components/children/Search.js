@@ -1,5 +1,6 @@
 var React = require("react");
 var Link = require("react-router").Link;
+var moment = require('moment');
 
 // Include any grandchildren components here
 var Event_list = require("./grandchildren/Event_list");
@@ -24,16 +25,31 @@ var Search = React.createClass({
     handleChange: function(event) {
         this.setState({selectedOption: event.target.value})
     },
+    handleStart: function (event) {
+        this.setState({startDate: event.target.value});
+    }, 
+
+    handleEnd: function (event) {
+        this.setState({endDate: event.target.value});
+    }, 
     handleSubmit: function(event) {
-        console.log("selectedOption " + this.state.selectedOption)
+
         event.preventDefault();
+
         if ({showMap: false}) {
             this.setState({showMap: true});
         }
         helpers.getSeatgeekGenre(this.state.selectedOption)
+
+    
+        helpers.getSeatgeekGenre(this.state.selectedOption, this.state.startDate, this.state.endDate)
+
             .then(function(data){
-                this.setState({results: {events: data}});
+
+                this.setState({results: {events: data}})
+
             }.bind(this))
+
         this.renderChild();
     },
     renderChild: function() {
@@ -44,15 +60,18 @@ var Search = React.createClass({
                 </div>
             );
         }
+
     },
     render: function() {
         return (
+           
             <div className="container" id="search-panel">
-                
+            
                 {/* Event search parameter*/}
                 <div className="row">
+                    {this.props.logIn ? (
                     <div className="panel panel-default">
-                        <div className="panel-heading">Search for events...</div>
+                        <div className="panel-heading">Search for events {this.props.first}!</div>
                         <div className="panel-body">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
@@ -68,29 +87,44 @@ var Search = React.createClass({
                                     </select>
                                     <br />
 
-                                    {/*<div className="input-group">
+                                    <div>
+                                        <label htmlFor = "startDate">Search Start Date</label>
                                         <input type="date" className="form-control" id="startDate"
-                                        value={this.state.startDate} onChange={this.handleChange} />
-
-                                        <span className="input-group-addon" />
-
+                                        value={this.state.startDate} onChange={this.handleStart} />
+                                      
+                                        <label htmlFor = "endDate">Search End Date</label>
                                         <input type="date" className="form-control" id="endDate"
-                                        value={this.state.endDate} onChange={this.handleChange} />
+                                        value={this.state.endDate} onChange={this.handleEnd} />
                                         
-                                    </div>*/}
+                                    </div>
                                     <br />
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> 
+                    ):(
+                    <div><h3>Log in to continue....</h3></div>
+                    )}
+
                 </div>
+
+                 {/* {this.props.children}
+                 {/* include grandchild components here}
+                {this.renderChild()}*/}
+
+                <div className="row">
+                    <Event_list login= {this.props.logIn} results={this.state.results} />
+                        
+                </div>
+
+                 
                 
-                {this.props.children}
-                {/* include grandchild components here*/}
-                {this.renderChild()}
+               
 
             </div>
+            
+            
         );
     }
 });
