@@ -14,6 +14,7 @@ var Event_list = React.createClass({
     componentDidUpdate: function() {
         console.log("Event map component has updated");
         locations = [];
+        console.log(this.state);
         //this.setState({ eventTimes: [] });
         if(this.props.results.events) {
             for (var i = 0; i < this.props.results.events.length; i++) {
