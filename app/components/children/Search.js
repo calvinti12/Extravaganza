@@ -39,8 +39,6 @@ var Search = React.createClass({
         if ({showMap: false}) {
             this.setState({showMap: true});
         }
-        helpers.getSeatgeekGenre(this.state.selectedOption)
-
     
         helpers.getSeatgeekGenre(this.state.selectedOption, this.state.startDate, this.state.endDate)
 
@@ -91,7 +89,7 @@ var Search = React.createClass({
                                         <label htmlFor = "startDate">Search Start Date</label>
                                         <input type="date" className="form-control" id="startDate"
                                         value={this.state.startDate} onChange={this.handleStart} />
-                                      
+
                                         <label htmlFor = "endDate">Search End Date</label>
                                         <input type="date" className="form-control" id="endDate"
                                         value={this.state.endDate} onChange={this.handleEnd} />

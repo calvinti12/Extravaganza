@@ -20,6 +20,8 @@ var helpers = {
       
     let seatgeekUrl;
 
+    console.log("in getSeatgeekGenre:" + selectedOption, startDate, endDate);
+
 
     switch(selectedOption) {
     case "music":
