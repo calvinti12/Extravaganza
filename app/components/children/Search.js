@@ -54,7 +54,7 @@ var Search = React.createClass({
         if (this.state.showMap) {
             return (
                 <div className="row">
-                    <Event_list results={this.state.results} />}
+                    <Event_list results={this.state.results} data={this.props} />}
                 </div>
             );
         }
@@ -107,9 +107,9 @@ var Search = React.createClass({
 
                 </div>
 
-                 {/* {this.props.children}
-                 {/* include grandchild components here}
-                {this.renderChild()}*/}
+                {this.props.children}
+                {/* include grandchild components here */}
+                {this.renderChild()}
 
                 {/*
                 <div className="row">
