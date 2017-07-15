@@ -79,8 +79,7 @@ var helpers = {
   }, 
 
   saveUser: function(user) {
-      console.log("I made it this far!");
-   
+      
     return axios.post("/api/user", user);
   }
 
