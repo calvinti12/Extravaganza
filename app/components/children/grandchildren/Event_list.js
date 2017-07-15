@@ -1,6 +1,8 @@
 var React = require("react");
 
 //include helpers to update events to database onClick
+var helpers = require("../../../utils/helpers.js");
+
 var locations = [];
 
 var Event_list = React.createClass({
@@ -33,12 +35,14 @@ var Event_list = React.createClass({
         // initializes the map once the for loop has finished pulling geolocations from props
         this.initMap();
     },
-    handleClick: function() {
-        if (this.state.showMap) {
-            this.setState({ showMap: false });
-        } else {
-            this.setState({ showMap: true });
-        }
+    handleClick: function(event) {
+        console.log("CLICKED", event);
+        
+        //helpers.postSaved(pass the info here)
+        helpers.postSaved(event.id, event.title, event.datetime_local, event.venue.address, event.venue.display_location)
+        .then(function() {
+            console.log("postSaved ran", event.title);
+        });
     },
     initMap: function() {
 
@@ -89,7 +93,7 @@ var Event_list = React.createClass({
                                         <p className="pull-left"> {event.venue.name} <small>@ {event.venue.address}, {event.venue.display_location} </small></p>
                                     </div>
                                     <div className="col-sm-4">
-                                        <button className="btn btn-primary pull-right"> Save Event </button>
+                                        <button className="btn btn-primary pull-right" onClick={() => this.handleClick(event)}> Save Event </button>
                                     </div>
                                 </div>
                             </div>

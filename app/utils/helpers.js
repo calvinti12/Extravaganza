@@ -45,7 +45,32 @@ var helpers = {
         return results.data.events;
     })
   },
-
+  getEvents: function() {
+    //console.log("getEvents helper method called");
+    return axios.get("/api/events").then(
+      function(results) {
+        console.log("axios getEvent results", results);
+        return results;
+      }
+    );
+  },
+  // will save events to the database
+  postSaved: function(ID, name, date, address, location) {
+    console.log("postSaved called with", ID, name, date, address, location);
+    var newEvent = {
+      eventID: ID,
+      eventName: name,
+      eventDate: date,
+      venueAddress: address,
+      venueLocation: location 
+    };
+    return axios.post("/api/events", newEvent).then(
+      function(response) {
+        console.log("postSaved axios results", newEvent);
+        return response.data._id;
+      }
+    );
+  },
 
   getUser: function (id_token) {
      var url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token; 
