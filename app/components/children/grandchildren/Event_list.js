@@ -41,15 +41,41 @@ var Event_list = React.createClass({
         }
         
     },
-    handleClick: function(event) {
-        console.log("CLICKED", event);
-        
-        //helpers.postSaved(pass the info here)
-        helpers.postSaved(event.id, event.title, event.datetime_local, event.venue.address, event.venue.display_location)
-        .then(function() {
-            console.log("postSaved ran", event.title);
-        });
+
+    saveEventOnUser: function (eventId) {
+        console.log("user ID:" + this.props.data.userMongo);
+        var userMongoId = this.props.data.userMongo; 
+        helpers.saveEventToUser(userMongoId, eventId)
+            .then(function() {
+                console.log("working on it");
+            }.bind(this));
+
     },
+
+    handleClick: function(event) {
+        // creates the event object to pass to the post route
+        var newEvent = {
+          eventID: event.id,
+          eventName: event.title,
+          eventDate: event.datetime_local,
+          venueAddress: event.venue.address,
+          venueLocation: event.venue.display_location,
+          users: this.props.data.userMongo
+        };
+
+        console.log(newEvent);
+
+        helpers.postSaved(newEvent)
+        .then(function(response) {
+            console.log("postSaved ran", event.title);  
+            console.log(response);
+            // return response.data._id;
+            console.log("I am the response data id: " + response.data._id);
+            this.saveEventOnUser(response.data._id);
+           
+        }.bind(this));
+    },
+
     initMap: function() {
 
         var labels = '1234567890';

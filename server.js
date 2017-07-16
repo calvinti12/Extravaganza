@@ -80,6 +80,15 @@ db.once("open", function() {
    
     });
 
+// Route to save the Mongo User ID to the Event
+  app.post("/api/user/database", function(req,res) {
+    console.log("userMongo is in the api route!" + req.body);
+
+    // Event.findOneAndUpdate({ "_id": req.params.userId}, { "comment": doc._id })
+
+
+  });
+
 // Route to get saved events
 app.get("/api/events", function(req, res) {
   console.log("api events get request in server.js");
@@ -101,6 +110,7 @@ app.post("/api/events", function(req, res) {
     if (err) {
       console.log(err);
     } else {
+    console.log("new Event to database id:" + doc);
       res.send(doc);
     }
   });
