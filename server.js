@@ -64,21 +64,20 @@ db.once("open", function() {
 // ROUTES
 
 // Route to save a user to the database
-  app.post("/api/user", function (req,res) {
+app.post("/api/user", function (req,res) {
     
       var newUser = new User(req.body);
-      console.log("I made it to the post route!");
-
       newUser.save(function(error, doc) {
 
         if (error) {
             console.log(error);
         } else {
               console.log("new User to database id:" + doc);
+              res.send(doc);
           }
         }); 
    
-    });
+});
 
 // Route to get saved events
 app.get("/api/events", function(req, res) {
@@ -101,9 +100,26 @@ app.post("/api/events", function(req, res) {
     if (err) {
       console.log(err);
     } else {
+    console.log("new Event to database id:" + doc);
       res.send(doc);
     }
   });
+});
+
+
+// Route to save the Event ID to the User
+app.post("/api/user/database", function(req,res) {
+    console.log("userMongo is in the api route!" + req.body);
+
+    User.findOneAndUpdate({ "_id": req.body.userId}, {"events": req.body.event})
+      .exec(function(err, doc) {
+          if (err) {
+              console.log(err);
+          } else {
+            res.send(doc);
+          }
+      }); 
+                
 });
 
 // any non API GET routes will be directed to our React app and handled by React router

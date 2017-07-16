@@ -55,21 +55,11 @@ var helpers = {
     );
   },
   // will save events to the database
-  postSaved: function(ID, name, date, address, location) {
-    console.log("postSaved called with", ID, name, date, address, location);
-    var newEvent = {
-      eventID: ID,
-      eventName: name,
-      eventDate: date,
-      venueAddress: address,
-      venueLocation: location 
-    };
-    return axios.post("/api/events", newEvent).then(
-      function(response) {
-        console.log("postSaved axios results", newEvent);
-        return response.data._id;
-      }
-    );
+  postSaved: function(newEvent) {
+    console.log("postSaved called with", newEvent);
+    // console.log("postSaved axios results", newEvent);
+    return axios.post("/api/events", newEvent);
+
   },
 
   getUser: function (id_token) {
@@ -79,9 +69,19 @@ var helpers = {
   }, 
 
   saveUser: function(user) {
-      console.log("I made it this far!");
-   
+      
     return axios.post("/api/user", user);
+  }, 
+
+  saveEventToUser: function(userMongo, eventId) {
+    var postObj = {
+      userId: userMongo,
+      event: eventId
+    };
+
+    console.log("this is my postObj", postObj);
+
+    return axios.post("/api/user/database", postObj); 
   }
 
 };
