@@ -74,6 +74,7 @@ db.once("open", function() {
             console.log(error);
         } else {
               console.log("new User to database id:" + doc);
+              res.send(doc);
           }
         }); 
    

@@ -23,6 +23,7 @@ getInitialState: function (){
       userZip: "",
       userLat: "",
       userLon: "",
+      userMongo: "",
       isLoggedIn: false, 
       modalIsOpen: false, 
       }; 
@@ -51,6 +52,9 @@ resetState: function () {
       userCity: "",
       userState: "",
       userZip: "",
+      userLat: "",
+      userLon: "",
+      userMongo:"",
       isLoggedIn: false, 
       modalIsOpen: true
   }); 
@@ -116,8 +120,10 @@ handleUser: function() {
 
   helpers.saveUser(user) 
     .then (function(res) {
-       console.log("I'm the saved user" + res);
-   }); 
+       console.log(res);
+       console.log(res.data._id);
+       this.setState({userMongo: res.data._id});
+   }.bind(this)); 
 
 },
 
@@ -227,7 +233,8 @@ handleUser: function() {
                   last: this.state.userLast,
                   email: this.state.userEmail,
                   lat: this.state.userLat,
-                  lon: this.state.userLon
+                  lon: this.state.userLon,
+                  userMongo: this.state.userMongo
                 })
               }
                         
