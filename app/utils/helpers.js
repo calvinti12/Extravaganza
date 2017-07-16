@@ -79,7 +79,7 @@ var helpers = {
       event: eventId
     };
 
-    console.log("userMongo has made it this far!" + postObj);
+    console.log("this is my postObj", postObj);
 
     return axios.post("/api/user/database", postObj); 
   }
