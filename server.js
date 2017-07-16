@@ -65,17 +65,25 @@ db.once("open", function() {
 
 // Route to save a user to the database
 app.post("/api/user", function (req,res) {
-    
+
+    // User.find({"email": req.body.email})
+    //   .exec(function(err, doc) {
+    //       if (err) {
+    //           console.log(err);
+    //       } else {
+    //         res.send(doc);
+    //       }
+    //   }); 
+
       var newUser = new User(req.body);
       newUser.save(function(error, doc) {
-
         if (error) {
             console.log(error);
         } else {
               console.log("new User to database id:" + doc);
               res.send(doc);
-          }
-        }); 
+        }
+      }); 
    
 });
 
@@ -111,7 +119,7 @@ app.post("/api/events", function(req, res) {
 app.post("/api/user/database", function(req,res) {
     console.log("userMongo is in the api route!" + req.body);
 
-    User.findOneAndUpdate({ "_id": req.body.userId}, {"events": req.body.event})
+    User.findOneAndUpdate({ "_id": req.body.userId}, {$push:{"events": req.body.event}})
       .exec(function(err, doc) {
           if (err) {
               console.log(err);
@@ -121,6 +129,36 @@ app.post("/api/user/database", function(req,res) {
       }); 
                 
 });
+
+// // Route to get all the saved events for a given user
+//  app.get("/api/events/database/:userId", function(req, res) {
+
+//       Event.find({"users": req.params.userId})
+//          .exec(function(err,doc){
+//              if (err) {
+//                     console.log(err);
+//                 } else {
+//                   res.send(doc);
+//                 }
+//       })
+//   });  
+
+
+// // Route to get all the saved users for a given event
+
+//   app.get("/api/users/database/:eventId", function(req,res) {
+
+//        User.find({"events": req.params.eventId})
+//         .exec(function(err,doc){
+//             if(err) {
+//                 console.log(err);
+//             } else {
+//                 res.send(doc);
+//             }
+//         })
+
+//   }); 
+     
 
 // any non API GET routes will be directed to our React app and handled by React router
 app.get("*", function(req, res) {
