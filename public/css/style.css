@@ -69,3 +69,7 @@
 .user-events:hover {
     box-shadow: 5px 5px 5px #888888;
 }
+
+.navbar-btn {
+    margin-right: 15px;
+}
