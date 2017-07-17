@@ -15,7 +15,6 @@ var Event_list = React.createClass({
         console.log("Event map component has updated");
         locations = [];
 
-        //this.setState({ eventTimes: [] });
         if(this.props.results.events) {
             for (var i = 0; i < this.props.results.events.length; i++) {
                 var venueName = this.props.results.events[i].title;
@@ -67,7 +66,9 @@ var Event_list = React.createClass({
 
         console.log(newEvent);
 
-        helpers.postSaved(newEvent)
+        var user = this.props.data.userMongo; 
+
+        helpers.postSaved(newEvent, user)
         .then(function(response) {
             console.log("postSaved ran", event.title);  
             console.log(response);

@@ -63,7 +63,7 @@ var helpers = {
     );
   },
   // will save events to the database
-  postSaved: function(newEvent) {
+  postSaved: function(newEvent, user) {
     console.log("postSaved called with", newEvent);
     // console.log("postSaved axios results", newEvent);
     return axios.post("/api/events", newEvent);

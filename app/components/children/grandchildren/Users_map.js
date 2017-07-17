@@ -27,7 +27,7 @@ var Users_map = React.createClass({
         this.callDatabase();
     },
     componentDidUpdate: function() {
-        console.log("Users map component has updated");
+        console.log("Event map component has updated");
         locations = [];
         // use for loop to go through user locations and push them to locations array
         if (this.state.eventUsers !== "") {
@@ -40,35 +40,41 @@ var Users_map = React.createClass({
             }
             console.log("users_map locations", locations);
             this.initMap();
+
         }
         
     },
     initMap: function() {
 
+        var labels = '1234567890';
+        var labelIndex = 0;
+
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: {lat: 41.878114, lng: -87.629798}
-            });
+          zoom: 10,
+          center: new google.maps.LatLng(41.8781, -87.9298),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
 
-            // Create an array of alphabetical characters used to label the markers.
-            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var infowindow = new google.maps.InfoWindow();
 
-            // Add some markers to the map.
-            // Note: The code uses the JavaScript Array.prototype.map() method to
-            // create an array of markers based on a given "locations" array.
-            // The map() method here has nothing to do with the Google Maps API.
-            var markers = locations.map(function(location, i) {
-                return new google.maps.Marker({
-                    position: location,
-                    label: labels[i % labels.length]
-                });
-            });
+        var marker, i;
 
-            // Add a marker clusterer to manage the markers.
-            var markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        for (i = 0; i < locations.length; i++) {  
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+            label: labels[labelIndex++ % labels.length],
+            animation: google.maps.Animation.DROP,
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i].name);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+        }
     
-        return markers;
     },
     renderUsers: function() {
         
