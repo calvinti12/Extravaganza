@@ -76,7 +76,18 @@ app.post("/api/user", function (req,res) {
               res.send(doc);
           }
         }); 
-   
+});
+app.get("/api/user/:id", function (req, res) {
+  var id = req.params.id;
+  console.log("userMongoId in /api/user/:id route is ", id);
+  User.find({ _id: id}, function(err, doc) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log("api users get, response: ", doc);
+      res.send(doc);
+    }
+  })
 });
 
 // Route to get saved events

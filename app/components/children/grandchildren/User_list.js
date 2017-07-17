@@ -8,8 +8,9 @@ var User_list = React.createClass({
         return { userEvents: "" };
     },
     componentDidMount: function() {
-        console.log("User_list component mounted");
-        helpers.getEvents().then(function(eventResults) {
+        var userMongoId = this.props.data.userMongo;
+        console.log("User_list component mounted with userId: " + userMongoId);
+        helpers.getEvents(userMongoId).then(function(eventResults) {
             this.setState({ userEvents: eventResults.data });
             console.log("eventResults in user_list mount", eventResults.data);
         }.bind(this));

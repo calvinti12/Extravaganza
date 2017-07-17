@@ -15,10 +15,10 @@ var Saved = React.createClass({
             <div className="container">
                 {/* include grandchild components here*/}
                 <div className="row">
-                    <User_list />
+                    <User_list data={this.props} />
                 </div>
                 <div className="row">
-                        <Users_map  />
+                    <Users_map  />
                 </div>
             </div>
         );
