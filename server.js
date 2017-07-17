@@ -101,7 +101,10 @@ app.get("/api/user/:id", function (req, res) {
       console.log("api users get, response: ", doc);
       res.send(doc);
     }
-  })
+  }); 
+
+});
+
 
 // Route to get saved events
 app.get("/api/events", function(req, res) {
