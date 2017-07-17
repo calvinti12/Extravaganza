@@ -119,7 +119,7 @@ app.get("/api/events", function(req, res) {
   });
 });
 
-// Route to save an event to database, but not if it already exists or if the user is already on it
+// Route to save an event to database, but not if it already exists 
 app.post("/api/events", function(req, res) {
 
 // look for event with the eventID from seatGeek already in the database:
@@ -130,8 +130,8 @@ app.post("/api/events", function(req, res) {
           } else {
 // If something goes wrong, console log that, but if not and you find the document.....
             if(doc.length > 0) {
-                console.log("I'm the doc[0].id" + doc[0]._id); 
-                console.log("im the event.body.users" + req.body.users);
+                // console.log("I'm the doc[0].id" + doc[0]._id); 
+                // console.log("im the event.body.users" + req.body.users);
 
 // then ask if you have the user already on the event document...
                 Event.find({$and: [{"_id": doc[0]._id }, {"users": {$in: [req.body.users]} } ]})
@@ -142,8 +142,8 @@ app.post("/api/events", function(req, res) {
 
                       if(response.length > 0) {
   // and if you do just send back the document, but don't add the user again...
-                      console.log("I'm the same event with a user in it!");
-                      console.log(doc[0]);
+                      // console.log("I'm the same event with a user in it!");
+                      // console.log(doc[0]);
                       
                       res.send(doc[0]);
     //if you don't have the user on the event document already...put them on there and send the result:
@@ -183,47 +183,35 @@ app.post("/api/events", function(req, res) {
 
 // Route to save the Event ID to the User
 app.post("/api/user/database", function(req,res) {
-    console.log("userMongo is in the api route!" + req.body);
+    console.log("userMongo is in the API route", req.body);
 
-    User.findOneAndUpdate({ "_id": req.body.userId}, {$push:{"events": req.body.event}})
-      .exec(function(err, doc) {
-          if (err) {
-              console.log(err);
-          } else {
-            res.send(doc);
-          }
-      }); 
-                
+// Look up in database where user is the request user ID and where in events array the request event ID is already there
+    User.find({$and: [{"_id": req.body.userId }, {"events": {$in: [req.body.event]} } ]})
+        .exec(function(er, response) {
+            if(er) {
+            console.log(er);
+            } else {
+  // and if you find that user.....
+                if(response.length > 0) {
+                      console.log("I'm the same user with the event in it!");
+                      console.log(response[0]);
+               // send that user back, but don't add it or do anything.
+                      res.send(response[0]);
+    //if you don't have the event on the user document already...put it on there and send the result:
+                  } else {
+
+                          User.findOneAndUpdate({ "_id": req.body.userId}, {$push:{"events": req.body.event}})
+                            .exec(function(err, doc) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                  res.send(response);
+                                }
+                            }); 
+                  }
+            }  
+    });      
 });
-
-// // Route to get all the saved events for a given user
-//  app.get("/api/events/database/:userId", function(req, res) {
-
-//       Event.find({"users": req.params.userId})
-//          .exec(function(err,doc){
-//              if (err) {
-//                     console.log(err);
-//                 } else {
-//                   res.send(doc);
-//                 }
-//       })
-//   });  
-
-
-// // Route to get all the saved users for a given event
-
-//   app.get("/api/users/database/:eventId", function(req,res) {
-
-//        User.find({"events": req.params.eventId})
-//         .exec(function(err,doc){
-//             if(err) {
-//                 console.log(err);
-//             } else {
-//                 res.send(doc);
-//             }
-//         })
-
-//   }); 
      
 
 // any non API GET routes will be directed to our React app and handled by React router
