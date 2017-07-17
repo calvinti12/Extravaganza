@@ -121,16 +121,29 @@ app.get("/api/events", function(req, res) {
 
 // Route to save an event to database
 app.post("/api/events", function(req, res) {
-  var newEvent = new Event(req.body);
-  console.log("save event post route ", req.body);
-  newEvent.save(function(err, doc) {
-    if (err) {
-      console.log(err);
-    } else {
-    console.log("new Event to database id:" + doc);
-      res.send(doc);
-    }
-  });
+
+  Event.find({"eventID": req.body.eventID})
+      .exec(function(err, doc) {
+          if (err) {
+              console.log(err);
+          } else {
+              if(doc.length > 0) {
+                res.send(doc[0]);
+
+             } else { 
+                var newEvent = new Event(req.body);
+                console.log("save event post route ", req.body);
+                newEvent.save(function(err, doc) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                  console.log("new Event to database id:" + doc);
+                    res.send(doc);
+                  }
+                });
+            }
+        }
+      }); 
 });
 
 
