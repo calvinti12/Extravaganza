@@ -63,3 +63,15 @@
 #display.false {
     display: none;
 }
+
+.userReminder h3{
+    font-family: 'Gorditas', cursive;
+    float: right;
+}
+
+div.panel-heading {
+    font-family: 'Gorditas';
+    border-color: #7cbf4d;
+    color: #6cc3c8;
+    background: transparent;
+}

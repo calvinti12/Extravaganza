@@ -99,7 +99,7 @@ var Search = React.createClass({
                         </div>
                     </div> 
                     ):(
-                    <div><h3>Log in to continue....</h3></div>
+                    <div className="userReminder"><h3>Log in to continue....</h3></div>
                     )}
                 </div>
 
