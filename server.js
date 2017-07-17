@@ -129,28 +129,31 @@ app.post("/api/events", function(req, res) {
               console.log(err);
           } else {
               if(doc.length > 0) {
-                console.log("I'm the doc[0] id" + doc[0]._id);
-                console.log("I'm the req.body.users" + req.body.users);
 
-                Event.find({$and: [{"_id": doc[0]._id }, {"users": req.body.users}] })
-                  .exec(function(er, response) {
-                    if(er) {
-                       console.log(er);
+                console.log("I'm the doc[0].id" + doc[0]._id); 
+                console.log("im the event.body.users" + req.body.users);
+
+                // Event.find({$and: [{"_id": doc[0]._id }, {"users": {$in: [req.body.users]} } ]})
+                //   .exec(function(er, response) {
+                //     if(er) {
+                //        console.log(er);
 
                        Event.findOneAndUpdate({"_id": doc[0]._id}, {$push: {"users": req.body.users}})
                         .exec(function(wrong, message){
                           if(wrong) {
                             console.log(wrong);
                           } else {
+                            console.log("I'm a one and update!");
                             res.send(message);
                           }
                         });
 
-                    } else {
-                      res.send(doc[0]);
-                    }
+                    // } else {
+                      
+                    //   res.send(doc[0]);
+                    // }
 
-                  }); 
+                  // }); 
 
              } else { 
                 var newEvent = new Event(req.body);
