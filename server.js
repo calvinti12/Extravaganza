@@ -90,16 +90,17 @@ app.get("/api/user/:id", function (req, res) {
 });
 
 // Route to get saved events
-app.get("/api/events", function(req, res) {
+app.get("/api/events/:id", function(req, res) {
+  var id = req.params.id;
   console.log("api events get request in server.js");
-  Event.find({}).exec(function(err, doc) {
+  Event.find({ _id: id }, function(err, doc) {
     if(err) {
       console.log(err);
     } else {
-      console.log("api events get");
+      console.log("api events get, response: ", doc);
       res.send(doc);
     }
-  });
+  })
 });
 
 // Route to save an event to database

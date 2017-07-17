@@ -1,14 +1,47 @@
 var React = require("react");
 
+// Include our helpers for API calls
+var helpers = require("../../../utils/helpers.js");
+
 var locations = [];
 
 var Users_map = React.createClass({
+    getInitialState: function() {
+        return { 
+            eventUsers: ""
+        };
+    },
+    callDatabase: function() {
+        var passedUsers = this.props.eventUsers;
+        var eventUsers = [];
+        for (var i = 0; i < passedUsers.length; i++) {
+            var userMongoId = passedUsers[i];
+            helpers.getUserEvents(userMongoId).then(function(userResults) {
+                eventUsers.push(userResults.data[0]);
+            });
+        }
+        this.setState({ eventUsers: eventUsers });
+    },
+    componentDidMount: function() {
+        console.log("Users_map component has mounted");
+        this.callDatabase();
+    },
     componentDidUpdate: function() {
         console.log("Users map component has updated");
         locations = [];
         // use for loop to go through user locations and push them to locations array
+        if (this.state.eventUsers !== "") {
+            for (var i = 0; i < this.state.eventUsers.length; i++) {
+                var userLoc = {
+                    lat: parseFloat(this.state.eventUsers[i].lat),
+                    lng: parseFloat(this.state.eventUsers[i].lon)
+                }
+                locations.push(userLoc);
+            }
+            console.log("users_map locations", locations);
+            this.initMap();
+        }
         
-        this.initMap();
     },
     initMap: function() {
 
@@ -37,6 +70,20 @@ var Users_map = React.createClass({
     
         return markers;
     },
+    renderUsers: function() {
+        
+        if (this.state.eventUsers.length) {
+            return this.state.eventUsers.map(function(user, index) {
+                return (
+                    <div key={index}>
+                        <li className="list-group-item">
+                            <p>{user.first}</p>
+                        </li>
+                    </div>
+                );
+            }.bind(this));
+        }
+    },
     render: function() {      
         return (
             <div className="row">
@@ -47,6 +94,7 @@ var Users_map = React.createClass({
                         <div className="panel-body" id="event-users">
                             <ul className="list-group" id="ul-event-users">
                                 {/* render users associated with event */}
+                                {this.renderUsers()}
                             </ul>
                         </div>
                     </div>

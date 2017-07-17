@@ -45,11 +45,19 @@ var helpers = {
         return results.data.events;
     })
   },
-  getEvents: function(userMongoId) {
-    console.log("getEvents helper method called with id " + userMongoId);
+  getUserEvents: function(userMongoId) {
+    console.log("getUserEvents helper method called with id " + userMongoId);
     return axios.get("/api/user/" + userMongoId).then(
       function(results) {
-        console.log("axios getEvent results", results);
+        console.log("axios getUserEvent results", results);
+        return results;
+      }
+    );
+  },
+  getEventsById: function(eventId) {
+    return axios.get("/api/events/" + eventId).then(
+      function(results) {
+        console.log("axios getEventsById result", results);
         return results;
       }
     );
