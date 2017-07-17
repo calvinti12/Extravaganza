@@ -122,52 +122,63 @@ app.get("/api/events", function(req, res) {
 // Route to save an event to database, but not if it already exists or if the user is already on it
 app.post("/api/events", function(req, res) {
 
+// look for event with the eventID from seatGeek already in the database:
   Event.find({"eventID": req.body.eventID})
       .exec(function(err, doc) {
           if (err) {
               console.log(err);
           } else {
-              if(doc.length > 0) {
+// If something goes wrong, console log that, but if not and you find the document.....
+            if(doc.length > 0) {
                 console.log("I'm the doc[0].id" + doc[0]._id); 
                 console.log("im the event.body.users" + req.body.users);
 
-                // Event.find({$and: [{"_id": doc[0]._id }, {"users": {$in: [req.body.users]} } ]})
-                //   .exec(function(er, response) {
-                //     if(er) {
-                //        console.log(er);
+// then ask if you have the user already on the event document...
+                Event.find({$and: [{"_id": doc[0]._id }, {"users": {$in: [req.body.users]} } ]})
+                  .exec(function(er, response) {
+                    if(er) {
+                       console.log(er);
+                    } else {
 
-                       Event.findOneAndUpdate({"_id": doc[0]._id}, {$push: {"users": req.body.users}})
+                      if(response.length > 0) {
+  // and if you do just send back the document, but don't add the user again...
+                      console.log("I'm the same event with a user in it!");
+                      console.log(doc[0]);
+                      
+                      res.send(doc[0]);
+    //if you don't have the user on the event document already...put them on there and send the result:
+                      } else {
+                        Event.findOneAndUpdate({"_id": doc[0]._id}, {$push: {"users": req.body.users}})
                         .exec(function(wrong, message){
                           if(wrong) {
                             console.log(wrong);
                           } else {
                             console.log("I'm a one and update!");
-                            res.send(message);
+                            res.send(doc[0]);
                           }
                         });
 
-                    // } else {
-                      
-                    //   res.send(doc[0]);
-                    // }
+                      }
+                    }
 
-                  // }); 
+                }); 
+// if you're not getting the event back because it doesn't exist, then create it.
 
-             } else { 
+             } else {
                 var newEvent = new Event(req.body);
                 console.log("save event post route ", req.body);
                 newEvent.save(function(err, doc) {
                   if (err) {
                     console.log(err);
                   } else {
-                  console.log("new Event to database id:" + doc);
                     res.send(doc);
                   }
-                });
-            }
-        }
+                }); 
+              }
+          }
       }); 
-});
+}); 
+
 
 
 // Route to save the Event ID to the User
