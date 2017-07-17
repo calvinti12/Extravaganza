@@ -72,8 +72,7 @@ app.post("/api/user", function (req,res) {
               console.log(err);
           } else {
               if(doc.length > 0) {
-                var knownUser = true; 
-                res.send(doc[0], knownUser);
+                res.send(doc[0]);
 
              } else { 
               var newUser = new User(req.body);
