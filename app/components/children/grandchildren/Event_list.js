@@ -44,6 +44,7 @@ var Event_list = React.createClass({
     saveEventOnUser: function (eventId) {
         console.log("user ID:" + this.props.data.userMongo);
         var userMongoId = this.props.data.userMongo; 
+        var eventId = eventId;
         helpers.saveEventToUser(userMongoId, eventId)
             .then(function(response) {
                 console.log("event added to user");

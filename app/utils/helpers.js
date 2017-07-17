@@ -45,9 +45,9 @@ var helpers = {
         return results.data.events;
     })
   },
-  getEvents: function() {
-    //console.log("getEvents helper method called");
-    return axios.get("/api/events").then(
+  getEvents: function(userMongoId) {
+    console.log("getEvents helper method called with id " + userMongoId);
+    return axios.get("/api/user/" + userMongoId).then(
       function(results) {
         console.log("axios getEvent results", results);
         return results;

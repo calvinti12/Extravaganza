@@ -116,6 +116,7 @@ handleUser: function() {
     lon: this.state.userLon
   }
 
+  console.log("handleUser: ", user);
   console.log("this is my user!!" + user);
 
   helpers.saveUser(user) 
@@ -195,7 +196,7 @@ handleUser: function() {
                         </div>
                         <ul className="nav navbar-nav">
                             <li><Link to="/Search">Event Search</Link></li>
-                           <li><Link to="/Saved">Saved Events</Link></li>
+                           <li><Link to="/Saved">My Events</Link></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li className = "navbar-text">{this.state.userFirst} {this.state.userLast}</li>
