@@ -63,3 +63,9 @@
 #display.false {
     display: none;
 }
+.user-events {
+    padding: 5px 0px 5px 0px;
+}
+.user-events:hover {
+    box-shadow: 5px 5px 5px #888888;
+}

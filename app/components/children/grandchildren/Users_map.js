@@ -1,27 +1,46 @@
 var React = require("react");
 
+// Include our helpers for API calls
+var helpers = require("../../../utils/helpers.js");
+
 var locations = [];
 
 var Users_map = React.createClass({
+    getInitialState: function() {
+        return { 
+            eventUsers: ""
+        };
+    },
+    callDatabase: function() {
+        var passedUsers = this.props.eventUsers;
+        var eventUsers = [];
+        for (var i = 0; i < passedUsers.length; i++) {
+            var userMongoId = passedUsers[i];
+            helpers.getUserEvents(userMongoId).then(function(userResults) {
+                eventUsers.push(userResults.data[0]);
+            });
+        }
+        this.setState({ eventUsers: eventUsers });
+    },
+    componentDidMount: function() {
+        console.log("Users_map component has mounted");
+        this.callDatabase();
+    },
     componentDidUpdate: function() {
         console.log("Event map component has updated");
         locations = [];
-
-        if(this.props.results.events) {
-            for (var i = 0; i < this.props.results.events.length; i++) {
-                var venueName = this.props.results.events[i].title;
-                // handles the venue geocoding to push into google maps API
-                var venueLat = this.props.results.events[i].venue.location.lat;
-                var venueLng = this.props.results.events[i].venue.location.lon;
-                var venueLocation = {}
-                venueLocation["name"] = venueName;
-                venueLocation["lat"] = venueLat;
-                venueLocation["lng"] = venueLng;
-                locations.push(venueLocation);
+        // use for loop to go through user locations and push them to locations array
+        if (this.state.eventUsers !== "") {
+            for (var i = 0; i < this.state.eventUsers.length; i++) {
+                var userLoc = {
+                    name: this.state.eventUsers[i].first,
+                    lat: parseFloat(this.state.eventUsers[i].lat),
+                    lng: parseFloat(this.state.eventUsers[i].lon)
+                }
+                locations.push(userLoc);
             }
-
-        // initializes the map once the for loop has finished pulling geolocations from props
-        this.initMap();
+            console.log("users_map locations", locations);
+            this.initMap();
 
         }
         
@@ -58,6 +77,20 @@ var Users_map = React.createClass({
         }
     
     },
+    renderUsers: function() {
+        
+        if (this.state.eventUsers.length) {
+            return this.state.eventUsers.map(function(user, index) {
+                return (
+                    <div key={index}>
+                        <li className="list-group-item">
+                            <p>{user.first}</p>
+                        </li>
+                    </div>
+                );
+            }.bind(this));
+        }
+    },
     render: function() {      
         return (
             <div className="row">
@@ -68,6 +101,7 @@ var Users_map = React.createClass({
                         <div className="panel-body" id="event-users">
                             <ul className="list-group" id="ul-event-users">
                                 {/* render users associated with event */}
+                                {this.renderUsers()}
                             </ul>
                         </div>
                     </div>
