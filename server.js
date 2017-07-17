@@ -119,7 +119,7 @@ app.get("/api/events", function(req, res) {
   });
 });
 
-// Route to save an event to database
+// Route to save an event to database, but not if it already exists or if the user is already on it
 app.post("/api/events", function(req, res) {
 
   Event.find({"eventID": req.body.eventID})
@@ -129,15 +129,26 @@ app.post("/api/events", function(req, res) {
           } else {
               if(doc.length > 0) {
 
-                Event.findOneAndUpdate({"_id": doc[0]._id}, {$push: {"users": req.body.users}})
-                  .exec(function(wrong, message){
-                    if(wrong) {
-                      console.log(wrong);
+                Event.find({$and: [{"_id": doc[0]._id }, {"users": req.body.users}] })
+                  .exec(function(er, response) {
+                    if(er) {
+                       console.log(er);
+
+                       Event.findOneAndUpdate({"_id": doc[0]._id}, {$push: {"users": req.body.users}})
+                        .exec(function(wrong, message){
+                          if(wrong) {
+                            console.log(wrong);
+                          } else {
+                            res.send(message);
+                          }
+                        });
+
                     } else {
-                      res.send(message);
+                      res.send(doc[0]);
                     }
-                  });
-                
+
+                  }); 
+
              } else { 
                 var newEvent = new Event(req.body);
                 console.log("save event post route ", req.body);
