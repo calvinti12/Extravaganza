@@ -65,20 +65,35 @@ db.once("open", function() {
 // -------------------------------------------------------------
 // ROUTES
 
+// Route to save a user to the database, but only if they're not already in there
 
-// Route to save a user to the database
 app.post("/api/user", function (req,res) {
 
-      var newUser = new User(req.body);
-      newUser.save(function(error, doc) {
-        if (error) {
-            console.log(error);
-        } else {
-              console.log("new User to database id:" + doc);
-              res.send(doc);
-        }
-      }); 
+    User.find({"email": req.body.email})
+      .exec(function(err, doc) {
+          if (err) {
+              console.log(err);
+          } else {
+              if(doc.length > 0) {
+                res.send(doc[0]);
+
+             } else { 
+              var newUser = new User(req.body);
+              console.log(newUser);
+                  newUser.save(function(error, response) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                          console.log("new User to database id:" + response);
+                          res.send(response);
+                    }
+                  }); 
+
+              }
+          }
+        });       
 });
+
 app.get("/api/user/:id", function (req, res) {
   var id = req.params.id;
   console.log("userMongoId in /api/user/:id route is ", id);
@@ -89,8 +104,10 @@ app.get("/api/user/:id", function (req, res) {
       console.log("api users get, response: ", doc);
       res.send(doc);
     }
-  })
+  }); 
+
 });
+
 
 // Route to get saved events
 app.get("/api/events", function(req, res) {
@@ -105,18 +122,50 @@ app.get("/api/events", function(req, res) {
   });
 });
 
-// Route to save an event to database
+// Route to save an event to database, but not if it already exists or if the user is already on it
 app.post("/api/events", function(req, res) {
-  var newEvent = new Event(req.body);
-  console.log("save event post route ", req.body);
-  newEvent.save(function(err, doc) {
-    if (err) {
-      console.log(err);
-    } else {
-    console.log("new Event to database id:" + doc);
-      res.send(doc);
-    }
-  });
+
+  Event.find({"eventID": req.body.eventID})
+      .exec(function(err, doc) {
+          if (err) {
+              console.log(err);
+          } else {
+              if(doc.length > 0) {
+
+                Event.find({$and: [{"_id": doc[0]._id }, {"users": req.body.users}] })
+                  .exec(function(er, response) {
+                    if(er) {
+                       console.log(er);
+
+                       Event.findOneAndUpdate({"_id": doc[0]._id}, {$push: {"users": req.body.users}})
+                        .exec(function(wrong, message){
+                          if(wrong) {
+                            console.log(wrong);
+                          } else {
+                            res.send(message);
+                          }
+                        });
+
+                    } else {
+                      res.send(doc[0]);
+                    }
+
+                  }); 
+
+             } else { 
+                var newEvent = new Event(req.body);
+                console.log("save event post route ", req.body);
+                newEvent.save(function(err, doc) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                  console.log("new Event to database id:" + doc);
+                    res.send(doc);
+                  }
+                });
+            }
+        }
+      }); 
 });
 
 
