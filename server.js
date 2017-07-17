@@ -63,19 +63,34 @@ db.once("open", function() {
 // -------------------------------------------------------------
 // ROUTES
 
-// Route to save a user to the database
+// Route to save a user to the database, but only if they're not already in there
 app.post("/api/user", function (req,res) {
 
-      var newUser = new User(req.body);
-      newUser.save(function(error, doc) {
-        if (error) {
-            console.log(error);
-        } else {
-              console.log("new User to database id:" + doc);
-              res.send(doc);
-        }
-      }); 
+    User.find({"email": req.body.email})
+      .exec(function(err, doc) {
+          if (err) {
+              console.log(err);
+          } else {
+              if(doc.length > 0) {
+                res.send(doc[0]);
+
+             } else { 
+              var newUser = new User(req.body);
+              console.log(newUser);
+                  newUser.save(function(error, response) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                          console.log("new User to database id:" + response);
+                          res.send(response);
+                    }
+                  }); 
+
+              }
+          }
+        });       
 });
+
 app.get("/api/user/:id", function (req, res) {
   var id = req.params.id;
   console.log("userMongoId in /api/user/:id route is ", id);
@@ -87,7 +102,6 @@ app.get("/api/user/:id", function (req, res) {
       res.send(doc);
     }
   })
-});
 
 // Route to get saved events
 app.get("/api/events", function(req, res) {
