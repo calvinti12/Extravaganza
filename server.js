@@ -66,25 +66,29 @@ db.once("open", function() {
 // Route to save a user to the database
 app.post("/api/user", function (req,res) {
 
-    // User.find({"email": req.body.email})
-    //   .exec(function(err, doc) {
-    //       if (err) {
-    //           console.log(err);
-    //       } else {
-    //         res.send(doc);
-    //       }
-    //   }); 
+    User.find({"email": req.body.email})
+      .exec(function(err, doc) {
+          if (err) {
+              console.log(err);
+          } else {
+              if(doc.length > 0) {
+                res.send(doc);
 
-      var newUser = new User(req.body);
-      newUser.save(function(error, doc) {
-        if (error) {
-            console.log(error);
-        } else {
-              console.log("new User to database id:" + doc);
-              res.send(doc);
-        }
-      }); 
-   
+             } else { 
+              var newUser = new User(req.body);
+              console.log(newUser);
+                  newUser.save(function(error, response) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                          console.log("new User to database id:" + response);
+                          res.send(response);
+                    }
+                  }); 
+
+              }
+          }
+        });       
 });
 
 // Route to get saved events
