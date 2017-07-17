@@ -128,8 +128,16 @@ app.post("/api/events", function(req, res) {
               console.log(err);
           } else {
               if(doc.length > 0) {
-                res.send(doc[0]);
 
+                Event.findOneAndUpdate({"_id": doc[0]._id}, {$push: {"users": req.body.users}})
+                  .exec(function(wrong, message){
+                    if(wrong) {
+                      console.log(wrong);
+                    } else {
+                      res.send(message);
+                    }
+                  });
+                
              } else { 
                 var newEvent = new Event(req.body);
                 console.log("save event post route ", req.body);

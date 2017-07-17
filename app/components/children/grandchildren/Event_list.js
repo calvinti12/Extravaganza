@@ -66,7 +66,9 @@ var Event_list = React.createClass({
 
         console.log(newEvent);
 
-        helpers.postSaved(newEvent)
+        var user = this.props.data.userMongo; 
+
+        helpers.postSaved(newEvent, user)
         .then(function(response) {
             console.log("postSaved ran", event.title);  
             console.log(response);
