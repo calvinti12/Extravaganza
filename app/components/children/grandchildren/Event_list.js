@@ -8,19 +8,22 @@ var locations = [];
 var Event_list = React.createClass({
     getInitialState: function() {
         return {
+            display: "display",
             eventTimes: []
         }
     },
     componentDidUpdate: function() {
         console.log("Event map component has updated");
         locations = [];
-        //this.setState({ eventTimes: [] });
+
         if(this.props.results.events) {
             for (var i = 0; i < this.props.results.events.length; i++) {
+                var venueName = this.props.results.events[i].title;
                 // handles the venue geocoding to push into google maps API
                 var venueLat = this.props.results.events[i].venue.location.lat;
                 var venueLng = this.props.results.events[i].venue.location.lon;
                 var venueLocation = {}
+                venueLocation["name"] = venueName;
                 venueLocation["lat"] = venueLat;
                 venueLocation["lng"] = venueLng;
                 locations.push(venueLocation);
@@ -31,45 +34,81 @@ var Event_list = React.createClass({
                 // var uglyTime = uglyDateTime.slice(11, 19);
                 // console.log("ugly", uglyDate, uglyTime);
             }
-        }
+
         // initializes the map once the for loop has finished pulling geolocations from props
         this.initMap();
-    },
-    handleClick: function(event) {
-        console.log("CLICKED", event);
+
+        }
         
-        //helpers.postSaved(pass the info here)
-        helpers.postSaved(event.id, event.title, event.datetime_local, event.venue.address, event.venue.display_location)
-        .then(function() {
-            console.log("postSaved ran", event.title);
-        });
     },
+
+    saveEventOnUser: function (eventId) {
+        console.log("user ID:" + this.props.data.userMongo);
+        var userMongoId = this.props.data.userMongo; 
+        var eventId = eventId;
+        helpers.saveEventToUser(userMongoId, eventId)
+            .then(function(response) {
+                console.log("event added to user");
+                console.log(response);
+            }.bind(this));
+
+    },
+
+    handleClick: function(event) {
+        // creates the event object to pass to the post route
+        var newEvent = {
+          eventID: event.id,
+          eventName: event.title,
+          eventDate: event.datetime_local,
+          venueAddress: event.venue.address,
+          venueLocation: event.venue.display_location,
+          users: this.props.data.userMongo
+        };
+
+        console.log(newEvent);
+
+        helpers.postSaved(newEvent)
+        .then(function(response) {
+            console.log("postSaved ran", event.title);  
+            console.log(response);
+            // return response.data._id;
+            console.log("I am the response data id: " + response.data._id);
+            this.saveEventOnUser(response.data._id);
+           
+        }.bind(this));
+    },
+
     initMap: function() {
 
+        var labels = '1234567890';
+        var labelIndex = 0;
+
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: {lat: 41.878114, lng: -87.629798}
+          zoom: 10,
+          center: new google.maps.LatLng(41.8781, -87.9298),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
-        // Create an array of alphabetical characters used to label the markers.
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var infowindow = new google.maps.InfoWindow();
 
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        var markers = locations.map(function(location, i) {
-            return new google.maps.Marker({
-                position: location,
-                label: labels[i % labels.length]
-            });
-        });
+        var marker, i;
 
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        for (i = 0; i < locations.length; i++) {  
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+            label: labels[labelIndex++ % labels.length],
+            animation: google.maps.Animation.DROP,
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i].name);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+        }
     
-        return markers;
     },
     renderEvents: function() {
         if (this.props.results.events) {
@@ -105,25 +144,27 @@ var Event_list = React.createClass({
     },
     render: function() {      
         return ( 
-            <div className="row">
-                {/* Event results panel*/}
-                <div className="col-lg-5">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">Event list...</div>
-                        <div className="panel-body" id="event-results">
-                            <ul className="list-group" id="ul-event-results">
-                                {this.renderEvents()}
-                            </ul>
+            <div id={this.state.display} className={this.props.login}>
+                <div className="row">
+                    {/* Event results panel*/}
+                    <div className="col-lg-5">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">Event list...</div>
+                            <div className="panel-body" id="event-results">
+                                <ul className="list-group" id="ul-event-results">
+                                    {this.renderEvents()}
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                {/* Event map panel*/}
-                <div className="col-lg-7">
-                    <div className="panel panel-default" id="map-panel">
-                        <div className="panel-heading">Events map...</div>
-                        <div className="panel-body">
-                            <div id="map"></div>
+                    
+                    {/* Event map panel*/}
+                    <div className="col-lg-7">
+                        <div className="panel panel-default" id="map-panel">
+                            <div className="panel-heading">Events map...</div>
+                            <div className="panel-body">
+                                <div id="map"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

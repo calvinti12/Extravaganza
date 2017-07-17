@@ -25,6 +25,7 @@ getInitialState: function (){
       userZip: "",
       userLat: "",
       userLon: "",
+      userMongo: "",
       isLoggedIn: false, 
       modalIsOpen: false, 
       }; 
@@ -53,6 +54,9 @@ resetState: function () {
       userCity: "",
       userState: "",
       userZip: "",
+      userLat: "",
+      userLon: "",
+      userMongo:"",
       isLoggedIn: false, 
       modalIsOpen: true
   }); 
@@ -98,6 +102,33 @@ responseGoogle: function (googleUser)  {
 
     }.bind(this)); 
   }, 
+
+handleUser: function() {
+
+  var user = {
+    first: this.state.userFirst, 
+    last: this.state.userLast,
+    email: this.state.userEmail,
+    picture: this.state.userPicture,
+    street: this.state.userStreet, 
+    city: this.state.userCity,
+    userState: this.state.userState,
+    zip: this.state.userZip,
+    lat: this.state.userLat,
+    lon: this.state.userLon
+  }
+
+  console.log("handleUser: ", user);
+  console.log("this is my user!!" + user);
+
+  helpers.saveUser(user) 
+    .then (function(res) {
+       console.log(res);
+       console.log(res.data._id);
+       this.setState({userMongo: res.data._id});
+   }.bind(this)); 
+
+},
 
   handleStreet: function(event) { 
     this.setState({userStreet: event.target.value});
@@ -151,12 +182,12 @@ responseGoogle: function (googleUser)  {
           this.setState({userLat: userLocation.coords.latitude, userLon: userLocation.coords.longitude});
           console.log(this.state.userLat); 
           console.log(this.state.userLon); 
+          this.handleUser(); 
           
-      }.bind(this));  
-    
-  }, 
-
-    render: function() {
+      }.bind(this)); 
+ }, 
+ 
+     render: function() {
         return (
             <div className="main-container">
                 {/* Navbar code */}
@@ -167,7 +198,7 @@ responseGoogle: function (googleUser)  {
                         </div>
                         <ul className="nav navbar-nav">
                             <li><Link to="/Search">Event Search</Link></li>
-                           <li><Link to="/Saved">Saved Events</Link></li>
+                           <li><Link to="/Saved">My Events</Link></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li className = "navbar-text">{this.state.userFirst} {this.state.userLast}</li>
@@ -206,7 +237,8 @@ responseGoogle: function (googleUser)  {
                   last: this.state.userLast,
                   email: this.state.userEmail,
                   lat: this.state.userLat,
-                  lon: this.state.userLon
+                  lon: this.state.userLon,
+                  userMongo: this.state.userMongo
                 })
               }
                         

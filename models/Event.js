@@ -18,7 +18,10 @@ var SeatgeekSchema = new Schema({
   venueLocation: {
     type: String
   },
-
+  users: [{
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }]
 });
 
 var Event = mongoose.model("Event", SeatgeekSchema);

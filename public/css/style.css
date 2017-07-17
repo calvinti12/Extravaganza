@@ -1,6 +1,12 @@
 /*div.container-fluid{
     background: #6cc3c8;
 }*/
+/*
+@font-face {
+  font-family: 'Rakoon';
+  src: local('Rakoon'), url(../fonts/Rakoon_PersonalUse.ttf) format('ttf');
+}*/
+
 
 .jumbotron {
     margin-bottom: 0px;
@@ -9,6 +15,7 @@
     text-shadow: #6cc3c8 0.3em 0.3em 0.3em;
     background-image: : url('img/mysteryMachine.png');
     background: transparent;
+    font-family: 'Lobster', cursive;
 }
 
 .jumbotron img {
@@ -16,13 +23,15 @@
     float:right;
 }
 
-h1 { font-family: 'Rakoon', arial, serif; }
+
 
 .nav_picture {
     border-radius: 50%;
     width: 40%;
     height: 40%;
     margin: 7px;
+    max-width: 30px: 
+    max-height: 30px;
 }
 #map {
     height: 400px;
@@ -43,4 +52,12 @@ h1 { font-family: 'Rakoon', arial, serif; }
     height: 400px;
     overflow: hidden;
     overflow-y: scroll;
+}
+
+#display.true {
+    display: visible;
+}
+
+#display.false {
+    display: none;
 }

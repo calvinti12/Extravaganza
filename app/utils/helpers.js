@@ -48,9 +48,9 @@ var helpers = {
         return results.data.events;
     })
   },
-  getEvents: function() {
-    //console.log("getEvents helper method called");
-    return axios.get("/api/events").then(
+  getEvents: function(userMongoId) {
+    console.log("getEvents helper method called with id " + userMongoId);
+    return axios.get("/api/user/" + userMongoId).then(
       function(results) {
         console.log("axios getEvent results", results);
         return results;
@@ -58,28 +58,34 @@ var helpers = {
     );
   },
   // will save events to the database
-  postSaved: function(ID, name, date, address, location) {
-    console.log("postSaved called with", ID, name, date, address, location);
-    var newEvent = {
-      eventID: ID,
-      eventName: name,
-      eventDate: date,
-      venueAddress: address,
-      venueLocation: location 
-    };
-    return axios.post("/api/events", newEvent).then(
-      function(response) {
-        console.log("postSaved axios results", newEvent);
-        return response.data._id;
-      }
-    );
+  postSaved: function(newEvent) {
+    console.log("postSaved called with", newEvent);
+    // console.log("postSaved axios results", newEvent);
+    return axios.post("/api/events", newEvent);
+
   },
 
   getUser: function (id_token) {
      var url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token; 
 
     return axios.get(url);
-  } 
+  }, 
+
+  saveUser: function(user) {
+      
+    return axios.post("/api/user", user);
+  }, 
+
+  saveEventToUser: function(userMongo, eventId) {
+    var postObj = {
+      userId: userMongo,
+      event: eventId
+    };
+
+    console.log("this is my postObj", postObj);
+
+    return axios.post("/api/user/database", postObj); 
+  }
 
 };
 

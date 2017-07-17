@@ -72,7 +72,7 @@ var Search = React.createClass({
                                 <div className="form-group">
                                     {/* How many inputs do we need?  Can use this input/label as template */}
                                     {/* Inputs include className, id, onChange, value, and placeholder */}
-                                    <label htmlFor="search">Select Event type   <img src="/img/flowerpower.svg"/></label>
+                                    <label htmlFor="search">Select Event type </label>
                                     {/* <input className="form-control" id="search" onChange={this.handleChange} 
                                     value={this.state.search} placeholder="Search event name, artist, keyword" /> */}
                                     <select className="form-control" id="search" onChange={this.handleChange} value={this.state.selectedOption}>

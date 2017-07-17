@@ -16,6 +16,9 @@ var MemcachedStore = require('connect-memcached')(session);
 
 // Require Schema
 
+var Event = require("./models/Event");
+var User = require("./models/User");
+
 
 // Create Instance of Express
 var app = express();
@@ -62,6 +65,107 @@ db.once("open", function() {
 // -------------------------------------------------------------
 // ROUTES
 
+
+// Route to save a user to the database
+app.post("/api/user", function (req,res) {
+
+      var newUser = new User(req.body);
+      newUser.save(function(error, doc) {
+        if (error) {
+            console.log(error);
+        } else {
+              console.log("new User to database id:" + doc);
+              res.send(doc);
+        }
+      }); 
+});
+app.get("/api/user/:id", function (req, res) {
+  var id = req.params.id;
+  console.log("userMongoId in /api/user/:id route is ", id);
+  User.find({ _id: id}, function(err, doc) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log("api users get, response: ", doc);
+      res.send(doc);
+    }
+  })
+});
+
+// Route to get saved events
+app.get("/api/events", function(req, res) {
+  console.log("api events get request in server.js");
+  Event.find({}).exec(function(err, doc) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log("api events get");
+      res.send(doc);
+    }
+  });
+});
+
+// Route to save an event to database
+app.post("/api/events", function(req, res) {
+  var newEvent = new Event(req.body);
+  console.log("save event post route ", req.body);
+  newEvent.save(function(err, doc) {
+    if (err) {
+      console.log(err);
+    } else {
+    console.log("new Event to database id:" + doc);
+      res.send(doc);
+    }
+  });
+});
+
+
+// Route to save the Event ID to the User
+app.post("/api/user/database", function(req,res) {
+    console.log("userMongo is in the api route!" + req.body);
+
+    User.findOneAndUpdate({ "_id": req.body.userId}, {$push:{"events": req.body.event}})
+      .exec(function(err, doc) {
+          if (err) {
+              console.log(err);
+          } else {
+            res.send(doc);
+          }
+      }); 
+                
+});
+
+// // Route to get all the saved events for a given user
+//  app.get("/api/events/database/:userId", function(req, res) {
+
+//       Event.find({"users": req.params.userId})
+//          .exec(function(err,doc){
+//              if (err) {
+//                     console.log(err);
+//                 } else {
+//                   res.send(doc);
+//                 }
+//       })
+//   });  
+
+
+// // Route to get all the saved users for a given event
+
+//   app.get("/api/users/database/:eventId", function(req,res) {
+
+//        User.find({"events": req.params.eventId})
+//         .exec(function(err,doc){
+//             if(err) {
+//                 console.log(err);
+//             } else {
+//                 res.send(doc);
+//             }
+//         })
+
+//   }); 
+     
+
+// any non API GET routes will be directed to our React app and handled by React router
 
 app.get("*", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
