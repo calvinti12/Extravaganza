@@ -63,7 +63,7 @@ db.once("open", function() {
 // -------------------------------------------------------------
 // ROUTES
 
-// Route to save a user to the database
+// Route to save a user to the database, but only if they're not already in there
 app.post("/api/user", function (req,res) {
 
     User.find({"email": req.body.email})
@@ -72,7 +72,8 @@ app.post("/api/user", function (req,res) {
               console.log(err);
           } else {
               if(doc.length > 0) {
-                res.send(doc);
+                var knownUser = true; 
+                res.send(doc[0], knownUser);
 
              } else { 
               var newUser = new User(req.body);

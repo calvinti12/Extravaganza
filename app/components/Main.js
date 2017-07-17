@@ -122,7 +122,7 @@ handleUser: function() {
     .then (function(res) {
        console.log(res);
        console.log(res.data._id);
-       this.setState({userMongo: res.data._id});
+      this.setState({userMongo: res.data._id});
    }.bind(this)); 
 
 },
