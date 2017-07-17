@@ -33,10 +33,10 @@ var User = new Schema({
     type: String
   }, 
   lat: {
-    type: String
+    type: Number
   }, 
   lon: {
-    type: String
+    type: Number
   }, 
   loggedIn: {
     type: Boolean 

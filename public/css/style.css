@@ -63,6 +63,7 @@
 #display.false {
     display: none;
 }
+<<<<<<< HEAD
 
 .userReminder h3{
     font-family: 'Gorditas', cursive;
@@ -74,4 +75,11 @@ div.panel-heading {
     border-color: #7cbf4d;
     color: #6cc3c8;
     background: transparent;
+}
+.user-events {
+    padding: 5px 0px 5px 0px;
+}
+.user-events:hover {
+    box-shadow: 5px 5px 5px #888888;
+
 }
