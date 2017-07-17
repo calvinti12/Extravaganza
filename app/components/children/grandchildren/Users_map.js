@@ -33,6 +33,7 @@ var Users_map = React.createClass({
         if (this.state.eventUsers !== "") {
             for (var i = 0; i < this.state.eventUsers.length; i++) {
                 var userLoc = {
+                    name: this.state.eventUsers[i].first,
                     lat: parseFloat(this.state.eventUsers[i].lat),
                     lng: parseFloat(this.state.eventUsers[i].lon)
                 }

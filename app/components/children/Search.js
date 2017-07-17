@@ -102,7 +102,7 @@ var Search = React.createClass({
                         </div>
                     </div> 
                     ):(
-                    <div><h3>Log in to continue....</h3></div>
+                    <div><h3>Please Log-in to begin your Extravaganza Journey!</h3></div>
                     )}
 
                 </div>
