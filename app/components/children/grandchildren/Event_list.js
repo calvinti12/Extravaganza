@@ -83,7 +83,7 @@ var Event_list = React.createClass({
 
     initMap: function() {
 
-        var labels = '1234567890';
+        var labels = '0123456789';
         var labelIndex = 0;
 
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -121,8 +121,11 @@ var Event_list = React.createClass({
                         <li className="list-group-item">
                             <div className="wrapper">
                                 <div className="row">
-                                    <div className="col-sm-12">
-                                        <h4><em> {event.title} </em></h4> 
+                                    <div className="col-sm-10">
+                                        <h4><em> {event.title} </em></h4>
+                                    </div>
+                                    <div className="col-sm-2">
+                                        <span className="badge badge-default badge-pill pull-right">{index}</span>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -135,7 +138,7 @@ var Event_list = React.createClass({
                                         <p className="pull-left"> {event.venue.name} <small>@ {event.venue.address}, {event.venue.display_location} </small></p>
                                     </div>
                                     <div className="col-sm-4">
-                                        <button className="btn btn-primary pull-right" onClick={() => this.handleClick(event)}> Save Event </button>
+                                            <button className="btn btn-primary pull-right" onClick={() => this.handleClick(event)}> Save Event </button>
                                     </div>
                                 </div>
                             </div>
