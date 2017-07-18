@@ -59,6 +59,19 @@ resetState: function () {
 
 },
 
+modalCheck: function() {
+  var email = this.state.userEmail; 
+
+    helpers.checkUser(email) 
+    .then(function (res){
+         console.log(res);
+      if (res.data[0]._id) {
+       
+        this.toggleModal(); 
+      }
+    }.bind(this)); 
+},
+
 responseGoogle: function (googleUser)  {
   
 
@@ -84,6 +97,8 @@ responseGoogle: function (googleUser)  {
           userPicture: user.picture,
           isLoggedIn: true
         });
+
+      this.modalCheck(); 
 
       } else {
         console.log("no user");
@@ -259,7 +274,8 @@ handleUser: function() {
 
                           </form> 
                       </div>
-                    </div>
+                   
+                  </div>
                 ): (
                   <div>
                   <h3>We use Google Authentication to get your photo and email.</h3>

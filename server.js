@@ -92,6 +92,21 @@ app.post("/api/user", function (req,res) {
         });       
 });
 
+//Route to check if already a saved user
+app.get("/api/email/:email", function (req,res) {
+
+  User.find({"email": req.params.email})
+    .exec(function (err, doc) {
+      if(err) {
+        console.log(err); 
+
+      } else {
+        res.send(doc);
+      }
+   
+    });
+});
+
 // Route to get saved users
 app.get("/api/user/:id", function (req, res) {
   var id = req.params.id;

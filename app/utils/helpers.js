@@ -80,6 +80,11 @@ var helpers = {
     };
 
     return axios.post("/api/user/database", postObj); 
+  }, 
+
+  checkUser: function (email) {
+
+    return axios.get("/api/email/" + email); 
   }
 
 };
