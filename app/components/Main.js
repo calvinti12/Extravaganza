@@ -33,13 +33,9 @@ getInitialState: function (){
 
 toggleModal: function () {
 
-  console.log(this.state.modalIsOpen);
-
     this.setState({
       modalIsOpen: !this.state.modalIsOpen
     });
-
-  console.log(this.state.modalIsOpen);
 
 }, 
 
@@ -65,18 +61,13 @@ resetState: function () {
 
 responseGoogle: function (googleUser)  {
   
-    console.log(googleUser);
 
     var id_token = googleUser.getAuthResponse().id_token;
-    console.log({accessToken: id_token});
     
     var user = googleUser.getAuthResponse(); 
-    console.log(user);
 
     helpers.getUser(id_token) 
     .then (function(res) {
-
-      console.log(res);
 
       user = {
         email: res.data.email,
@@ -84,8 +75,6 @@ responseGoogle: function (googleUser)  {
         last: res.data.family_name,
         picture: res.data.picture
       }
-
-      console.log(user);
 
       if(user) {
         this.setState({
@@ -118,13 +107,8 @@ handleUser: function() {
     lon: this.state.userLon
   }
 
-  console.log("handleUser: ", user);
-  console.log("this is my user!!" + user);
-
   helpers.saveUser(user) 
     .then (function(res) {
-       console.log(res);
-       console.log(res.data._id);
       this.setState({userMongo: res.data._id});
    }.bind(this)); 
 
@@ -162,7 +146,6 @@ handleUser: function() {
         zip: this.state.userZip 
     }
 
-     console.log(this.state.userStreet);
      this.toggleModal(); 
 
     geolocator.config({
@@ -176,12 +159,8 @@ handleUser: function() {
     var concatAddress = `${userAddress.street} ${userAddress.city}, ${userAddress.userState} ${userAddress.zip}`;
 
       geolocator.geocode(concatAddress, function (err, userLocation, ) {
-
-          console.log(err || userLocation);
  
           this.setState({userLat: userLocation.coords.latitude, userLon: userLocation.coords.longitude});
-          console.log(this.state.userLat); 
-          console.log(this.state.userLon); 
           this.handleUser(); 
           
       }.bind(this)); 

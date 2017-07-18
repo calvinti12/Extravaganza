@@ -17,14 +17,8 @@ var helpers = {
 
   // This will run our query.
   getSeatgeekGenre: function(selectedOption, startDate, endDate) {
-    console.log("helper selectedOption" + selectedOption)
-    console.log("helper startDate" + startDate)
-    console.log("helper endDate" + endDate)
       
     let seatgeekUrl;
-
-    console.log("in getSeatgeekGenre:" + selectedOption, startDate, endDate);
-
 
     switch(selectedOption) {
     case "music":
@@ -44,15 +38,12 @@ var helpers = {
     //hardcoding chicago 
     return axios.get(seatgeekUrl + "&datetime_local.gte=" + startDate + "&datetime_local.lt=" + endDate)
       .then(function(results) {
-        console.log("Axios Results", results.data.events);
         return results.data.events;
     })
   },
   getUserEvents: function(userMongoId) {
-    console.log("getUserEvents helper method called with id " + userMongoId);
     return axios.get("/api/user/" + userMongoId).then(
       function(results) {
-        console.log("axios getUserEvent results", results);
         return results;
       }
     );
@@ -60,14 +51,12 @@ var helpers = {
   getEventsById: function(eventId) {
     return axios.get("/api/events/" + eventId).then(
       function(results) {
-        console.log("axios getEventsById result", results);
         return results;
       }
     );
   },
   // will save events to the database
   postSaved: function(newEvent, user) {
-    console.log("postSaved called with", newEvent);
     // console.log("postSaved axios results", newEvent);
     return axios.post("/api/events", newEvent);
 
@@ -89,8 +78,6 @@ var helpers = {
       userId: userMongo,
       event: eventId
     };
-
-    console.log("this is my postObj", postObj);
 
     return axios.post("/api/user/database", postObj); 
   }

@@ -80,12 +80,10 @@ app.post("/api/user", function (req,res) {
 
              } else { 
               var newUser = new User(req.body);
-              console.log(newUser);
                   newUser.save(function(error, response) {
                     if (error) {
                         console.log(error);
                     } else {
-                          console.log("new User to database id:" + response);
                           res.send(response);
                     }
                   }); 
@@ -97,12 +95,10 @@ app.post("/api/user", function (req,res) {
 
 app.get("/api/user/:id", function (req, res) {
   var id = req.params.id;
-  console.log("userMongoId in /api/user/:id route is ", id);
   User.find({ _id: id}, function(err, doc) {
     if(err) {
       console.log(err);
     } else {
-      console.log("api users get, response: ", doc);
       res.send(doc);
     }
   }); 
@@ -113,12 +109,10 @@ app.get("/api/user/:id", function (req, res) {
 // Route to get saved events
 app.get("/api/events/:id", function(req, res) {
   var id = req.params.id;
-  console.log("api events get request in server.js");
   Event.find({ _id: id }, function(err, doc) {
     if(err) {
       console.log(err);
     } else {
-      console.log("api events get, response: ", doc);
       res.send(doc);
     }
   })
@@ -136,9 +130,6 @@ app.post("/api/events", function(req, res) {
 
 // If something goes wrong, console log that, but if not and you find the document.....
             if(doc.length > 0) {
-
-                console.log("I'm the doc[0].id" + doc[0]._id); 
-                console.log("im the event.body.users" + req.body.users);
 
 // then ask if you have the user already on the event document...
                 Event.find({$and: [{"_id": doc[0]._id }, {"users": {$in: [req.body.users]} } ]})
@@ -160,7 +151,6 @@ app.post("/api/events", function(req, res) {
                           if(wrong) {
                             console.log(wrong);
                           } else {
-                            console.log("I'm a one and update!");
                             res.send(doc[0]);
                           }
                         });
@@ -173,7 +163,6 @@ app.post("/api/events", function(req, res) {
 
              } else {
                 var newEvent = new Event(req.body);
-                console.log("save event post route ", req.body);
                 newEvent.save(function(err, doc) {
                   if (err) {
                     console.log(err);
@@ -190,7 +179,6 @@ app.post("/api/events", function(req, res) {
 
 // Route to save the Event ID to the User
 app.post("/api/user/database", function(req,res) {
-    console.log("userMongo is in the API route", req.body);
 
 // Look up in database where user is the request user ID and where in events array the request event ID is already there
     User.find({$and: [{"_id": req.body.userId }, {"events": {$in: [req.body.event]} } ]})
@@ -200,8 +188,6 @@ app.post("/api/user/database", function(req,res) {
             } else {
   // and if you find that user.....
                 if(response.length > 0) {
-                      console.log("I'm the same user with the event in it!");
-                      console.log(response[0]);
                // send that user back, but don't add it or do anything.
                       res.send(response[0]);
     //if you don't have the event on the user document already...put it on there and send the result:
