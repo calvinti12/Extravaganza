@@ -64,7 +64,6 @@ modalCheck: function() {
 
     helpers.checkUser(email) 
     .then(function (res){
-         console.log(res);
       if (res.data[0]._id) {
        
         this.toggleModal(); 
