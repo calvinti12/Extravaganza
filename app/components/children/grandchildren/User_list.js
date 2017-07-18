@@ -69,12 +69,13 @@ var User_list = React.createClass({
                             <div className="row">
                                 <div className="col-sm-6">
                                     <p>{event.eventName}</p>
-                                </div>
-                                <div className="col-sm-3">
-                                    <p>{event.venueName}</p>
+                                    <p><small> ...at {event.venueName} </small></p>
                                 </div>
                                 <div className="col-sm-3">
                                     <p>{event.eventDate}</p>
+                                </div>
+                                <div className="col-sm-3">
+                                    
                                 </div>
                             </div>
                         </li>
@@ -84,7 +85,7 @@ var User_list = React.createClass({
         }
     },
     renderMap: function() {
-        if (this.state.eventUsers !== "") {
+        if (this.state.eventUsers.length) {
             return (
                 <Users_map eventUsers={this.state.eventUsers} />
             );

@@ -17,9 +17,6 @@ var Saved = React.createClass({
                 <div className="row">
                     <User_list data={this.props} />
                 </div>
-                <div className="row">
-                    <Users_map  data={this.props} />
-                </div>
             </div>
         );
     }
