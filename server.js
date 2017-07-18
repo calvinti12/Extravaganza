@@ -51,8 +51,8 @@ app.use(session(sessionConfig));
 // ---------------------------------------------------------
 // MONGO 
 
-// mongoose.connect("mongodb://localhost/extravaganza");
-mongoose.connect("mongodb://heroku_vzjh23tg:jourgchon56a5cpp3mecgs45kn@ds139370.mlab.com:39370/heroku_vzjh23tg");
+mongoose.connect("mongodb://localhost/extravaganza");
+// mongoose.connect("mongodb://heroku_vzjh23tg:jourgchon56a5cpp3mecgs45kn@ds139370.mlab.com:39370/heroku_vzjh23tg");
 var db = mongoose.connection;
 
 db.on("error", function(err) {
@@ -67,7 +67,6 @@ db.once("open", function() {
 // ROUTES
 
 // Route to save a user to the database, but only if they're not already in there
-
 app.post("/api/user", function (req,res) {
 
     User.find({"email": req.body.email})
@@ -93,6 +92,7 @@ app.post("/api/user", function (req,res) {
         });       
 });
 
+// Route to get saved users
 app.get("/api/user/:id", function (req, res) {
   var id = req.params.id;
   User.find({ _id: id}, function(err, doc) {
@@ -206,9 +206,33 @@ app.post("/api/user/database", function(req,res) {
     });      
 });
      
+// Route to update users if they delete events from their profile
+app.post("/api/user/delete_event", function(req,res) {
+  console.log("I'm the delete route", req.body);
+
+//Look up in the database the user on which the event needs to be deleted, and just pull it from THAT user
+  User.update({"_id": req.body.userId}, {$pull: {"events": {$in: [req.body.eventId] }} })
+    .exec (function(error, doc) {
+      if(error) {
+        console.log(error);
+      } else {
+
+   //Look up the event and delete the user from that event 
+        Event.update({"_id": req.body.eventId}, {$pull: {"users": {$in: [req.body.userId] } } })
+          .exec (function(er, message) {
+            if(er) {
+              console.log(er);
+            } else {
+              res.send(message);
+            }
+        });
+
+      }
+
+    });
+});
 
 // any non API GET routes will be directed to our React app and handled by React router
-
 app.get("*", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
