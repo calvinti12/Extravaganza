@@ -8,6 +8,7 @@ var locations = [];
 var Event_list = React.createClass({
     getInitialState: function() {
         return {
+            display: "display",
             eventTimes: []
         }
     },
@@ -146,25 +147,27 @@ var Event_list = React.createClass({
     },
     render: function() {      
         return ( 
-            <div className="row">
-                {/* Event results panel*/}
-                <div className="col-lg-5">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">Event list...</div>
-                        <div className="panel-body" id="event-results">
-                            <ul className="list-group" id="ul-event-results">
-                                {this.renderEvents()}
-                            </ul>
+            <div id={this.state.display} className={this.props.login}>
+                <div className="row">
+                    {/* Event results panel*/}
+                    <div className="col-lg-5">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">Event list...</div>
+                            <div className="panel-body" id="event-results">
+                                <ul className="list-group" id="ul-event-results">
+                                    {this.renderEvents()}
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                {/* Event map panel*/}
-                <div className="col-lg-7">
-                    <div className="panel panel-default" id="map-panel">
-                        <div className="panel-heading">Events map...</div>
-                        <div className="panel-body">
-                            <div id="map"></div>
+                    
+                    {/* Event map panel*/}
+                    <div className="col-lg-7">
+                        <div className="panel panel-default" id="map-panel">
+                            <div className="panel-heading">Events map...</div>
+                            <div className="panel-body">
+                                <div id="map"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

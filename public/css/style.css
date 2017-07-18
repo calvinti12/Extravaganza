@@ -1,3 +1,32 @@
+/*div.container-fluid{
+    background: #6cc3c8;
+}*/
+/*
+@font-face {
+  font-family: 'Rakoon';
+  src: local('Rakoon'), url(../fonts/Rakoon_PersonalUse.ttf) format('ttf');
+}*/
+
+
+.jumbotron {
+    margin-bottom: 0px;
+    height: 350px;
+    color: #6f7178;
+    text-shadow: #6cc3c8 0.3em 0.3em 0.3em;
+    background-image: : url('img/mysteryMachine.png');
+    background: transparent;
+    /*font-family: 'Gorditas', cursive, bold;*/
+    /*font-family: 'Spicy Rice', cursive, bold;*/
+    font-family: 'Modak', cursive, bold;
+}
+
+.jumbotron img {
+    height:200px;
+    float:right;
+}
+
+
+
 .nav_picture {
     border-radius: 50%;
     width: 40%;
@@ -26,9 +55,21 @@
     overflow: hidden;
     overflow-y: scroll;
 }
+
+#display.true {
+    display: visible;
+}
+
+#display.false {
+    display: none;
+}
 .user-events {
     padding: 5px 0px 5px 0px;
 }
 .user-events:hover {
     box-shadow: 5px 5px 5px #888888;
+}
+
+.navbar-btn {
+    margin-right: 15px;
 }

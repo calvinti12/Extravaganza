@@ -50,6 +50,19 @@ var Search = React.createClass({
 
         this.renderChild();
     },
+
+    handleReset: function() {
+        this.setState({
+            showMap: false,
+            startDate: "",
+            endDate: "",
+
+            results: {},
+            searchOptions: ["music", "sport", "theater"],
+            selectedOption: "music"
+        });
+
+    },
     renderChild: function() {
         if (this.state.showMap) {
             return (
@@ -97,26 +110,19 @@ var Search = React.createClass({
                                     </div>
                                     <br />
                                     <button type="submit" className="btn btn-primary">Submit</button>
+                                    <button className="btn btn-danger" onClick={this.handleReset}>Reset</button>
                                 </div>
                             </form>
                         </div>
                     </div> 
                     ):(
-                    <div><h3>Log in to continue....</h3></div>
+                    <div><h3>Please Log-in to begin your Extravaganza Journey!</h3></div>
                     )}
-
                 </div>
 
                 {this.props.children}
-                {/* include grandchild components here */}
+                {/* include grandchild components here} */}
                 {this.renderChild()}
-
-                {/*
-                <div className="row">
-                    <Event_list login= {this.props.logIn} results={this.state.results} />
-                        
-                </div>
-                */}
                  
                 
                

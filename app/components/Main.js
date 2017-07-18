@@ -3,8 +3,10 @@ var helpers = require("../utils/helpers");
 var geolocator = require("geolocator");
 var Link = require("react-router").Link;
 
+
 var Saved = require("./children/Saved")
 var Search = require("./children/Search");
+
 var Modal = require("./Modal");
 
 import GoogleLogin from 'react-google-login';
@@ -222,7 +224,8 @@ handleUser: function() {
                   <div className="jumbotron">
                
                   <h1>Welcome to ShuttleExtravaganza!</h1>
-                   <p>Search for rideshare buddies who are going to the same events</p>
+                  <p>Search for rideshare buddies who are going to the same events</p>
+                  <img src="/img/mysteryMachine.png"/>
     
                   </div>
                 </div>
