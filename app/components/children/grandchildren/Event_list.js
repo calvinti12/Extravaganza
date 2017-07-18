@@ -152,7 +152,7 @@ var Event_list = React.createClass({
                     {/* Event results panel*/}
                     <div className="col-lg-5">
                         <div className="panel panel-default">
-                            <div className="panel-heading">Event list...</div>
+                            <div className="panel-heading"><strong>Event list...</strong></div>
                             <div className="panel-body" id="event-results">
                                 <ul className="list-group" id="ul-event-results">
                                     {this.renderEvents()}
@@ -164,7 +164,7 @@ var Event_list = React.createClass({
                     {/* Event map panel*/}
                     <div className="col-lg-7">
                         <div className="panel panel-default" id="map-panel">
-                            <div className="panel-heading">Events map...</div>
+                            <div className="panel-heading"><strong>Events map...</strong></div>
                             <div className="panel-body">
                                 <div id="map"></div>
                             </div>

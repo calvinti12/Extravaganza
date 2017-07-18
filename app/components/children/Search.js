@@ -2,6 +2,9 @@ var React = require("react");
 var Link = require("react-router").Link;
 var moment = require('moment');
 
+
+
+
 // Include any grandchildren components here
 var Event_list = require("./grandchildren/Event_list");
 
@@ -82,7 +85,7 @@ var Search = React.createClass({
                 <div className="row">
                     {this.props.logIn ? (
                     <div className="panel panel-default">
-                        <div className="panel-heading">Search for events {this.props.first}!</div>
+                        <div className="panel-heading"><strong>Search for events {this.props.first}!</strong></div>
                         <div className="panel-body">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
@@ -116,7 +119,9 @@ var Search = React.createClass({
                         </div>
                     </div> 
                     ):(
-                    <div><h3>Please Log-in to begin your Extravaganza Journey!</h3></div>
+
+                    <div className="userReminder"><h3>Log in to continue....</h3></div>
+
                     )}
                 </div>
 
