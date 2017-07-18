@@ -100,10 +100,10 @@ var Users_map = React.createClass({
                                 <div className="col-sm-12">
                                     <div className="row">
                                         <div className="col-sm-10">
-                                        <img src={user.picture} />
+                                            <img src={user.picture} />
                                         </div>
                                         <div className="col-sm-2">
-                                        <span className="badge badge-default badge-pill">{index+1}</span>
+                                            <span className="badge badge-default badge-pill">{index+1}</span>
                                         </div>
                                     </div>
                                 
