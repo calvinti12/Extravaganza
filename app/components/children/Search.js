@@ -42,10 +42,13 @@ var Search = React.createClass({
         if ({showMap: false}) {
             this.setState({showMap: true});
         }
-
+    
         helpers.getSeatgeekGenre(this.state.selectedOption, this.state.startDate, this.state.endDate)
+
             .then(function(data){
+
                 this.setState({results: {events: data}})
+
             }.bind(this))
 
         this.renderChild();
@@ -67,7 +70,7 @@ var Search = React.createClass({
         if (this.state.showMap) {
             return (
                 <div className="row">
-                    <Event_list results={this.state.results} />}
+                    <Event_list results={this.state.results} data={this.props} />}
                 </div>
             );
         }
@@ -82,13 +85,13 @@ var Search = React.createClass({
                 <div className="row">
                     {this.props.logIn ? (
                     <div className="panel panel-default">
-                        <div className="panel-heading">Search for events {this.props.first}!</div>
+                        <div className="panel-heading"><strong>Search for events {this.props.first}!</strong></div>
                         <div className="panel-body">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     {/* How many inputs do we need?  Can use this input/label as template */}
                                     {/* Inputs include className, id, onChange, value, and placeholder */}
-                                    <label htmlFor="search">Select Event type </label>
+                                    <label htmlFor="search">Select Event type</label>
                                     {/* <input className="form-control" id="search" onChange={this.handleChange} 
                                     value={this.state.search} placeholder="Search event name, artist, keyword" /> */}
                                     <select className="form-control" id="search" onChange={this.handleChange} value={this.state.selectedOption}>
@@ -122,15 +125,9 @@ var Search = React.createClass({
                     )}
                 </div>
 
-                 {/* {this.props.children}
-                 {/* include grandchild components here}
-                {this.renderChild()}*/}
-
-                <div className="row">
-                    <Event_list login= {this.props.logIn} results={this.state.results} />
-
-                </div>
-
+                {this.props.children}
+                {/* include grandchild components here} */}
+                {this.renderChild()}
                  
                 
                

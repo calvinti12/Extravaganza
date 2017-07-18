@@ -12,7 +12,7 @@
 }
 
 body {
-   /*background-color: yellow; */
+   background-color: #E0F8F7; 
   /* Visual */
   /*background-image: url('../img/disco.png');*/
   width: 100%;
@@ -54,26 +54,12 @@ body {
     max-height: 430px;
 }
 
-div#event-results.panel-body{
-    background-image: url('../img/Audience.jpg');
-    background-size: 930px 435px;
-    filter: opacity(30%);
-    background-repeat: no-repeat;
-}
 
 #ul-event-results {
     height: 400px;
     overflow: hidden;
     overflow-y: scroll;
 }
-
-ul.#ul-event-results.list-group {
-    filter: none;
-}
-
-/*li.list-group-item{
-    filter: none;
-}*/
 
 
 #event-users {
@@ -95,33 +81,31 @@ ul.#ul-event-results.list-group {
 
 .userReminder h3{
     font-family: 'Gorditas', cursive;
-    float: right;
+/*    float: right;*/
     color: #6f7178;
 }
 
 div.panel-heading {
-    font-family: 'Gorditas';
+    font-family: 'Source Sans Pro', sans-serif, bold;
+    background-color: #CEECF5 !important;
+    border-style: solid;
+    border-color: #6cc3c8 #7cbf4d !important; 
 
 }
 
 div.panel-body {
-    font-family: 'Gorditas';
+    font-family: 'Source Sans Pro', sans-serif, bold;
+    background-color: #CEECF5; 
+    border-style: solid;
+    border-color: #6cc3c8 #7cbf4d !important;
 }
 .user-events {
     padding: 5px 0px 5px 0px;
 }
 .user-events:hover {
     box-shadow: 5px 5px 5px #888888;
-
 }
 
-/*.listBackground{
-    background-image: url('../img/Audience.jpg');
+.navbar-btn {
+    margin-right: 15px;
 }
-*/
-/*div#event-results.panel-body{
-    background-image: url('../img/Audience.jpg');
-    height: 100%;
-}*/
-
-/*background-image: url('../img/disco.png');*/
