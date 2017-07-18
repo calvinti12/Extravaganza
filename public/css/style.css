@@ -6,6 +6,18 @@
   font-family: 'Rakoon';
   src: local('Rakoon'), url(../fonts/Rakoon_PersonalUse.ttf) format('ttf');
 }*/
+.custom {
+  cursor: url('../img/flower.png'), auto;
+  height: 100px;
+}
+
+body {
+   background-color: #E0F8F7; 
+  /* Visual */
+  /*background-image: url('../img/disco.png');*/
+  width: 100%;
+  height: 30%;
+}
 
 
 .jumbotron {
@@ -13,15 +25,14 @@
     height: 350px;
     color: #6f7178;
     text-shadow: #6cc3c8 0.3em 0.3em 0.3em;
-    background-image: : url('img/mysteryMachine.png');
     background: transparent;
     /*font-family: 'Gorditas', cursive, bold;*/
-    /*font-family: 'Spicy Rice', cursive, bold;*/
-    font-family: 'Modak', cursive, bold;
+    font-family: 'Spicy Rice', cursive, bold;
+    /*font-family: 'Modak', cursive, bold;*/
 }
 
 .jumbotron img {
-    height:200px;
+    height:350px;
     float:right;
 }
 
@@ -42,11 +53,15 @@
 #event-results {
     max-height: 430px;
 }
+
+
 #ul-event-results {
     height: 400px;
     overflow: hidden;
     overflow-y: scroll;
 }
+
+
 #event-users {
     max-height: 430px;
 }
@@ -62,6 +77,27 @@
 
 #display.false {
     display: none;
+}
+
+.userReminder h3{
+    font-family: 'Gorditas', cursive;
+/*    float: right;*/
+    color: #6f7178;
+}
+
+div.panel-heading {
+    font-family: 'Source Sans Pro', sans-serif, bold;
+    background-color: #CEECF5 !important;
+    border-style: solid;
+    border-color: #6cc3c8 #7cbf4d !important; 
+
+}
+
+div.panel-body {
+    font-family: 'Source Sans Pro', sans-serif, bold;
+    background-color: #CEECF5; 
+    border-style: solid;
+    border-color: #6cc3c8 #7cbf4d !important;
 }
 .user-events {
     padding: 5px 0px 5px 0px;
