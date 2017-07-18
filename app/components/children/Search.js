@@ -118,19 +118,11 @@ var Search = React.createClass({
                     ):(
                     <div><h3>Please Log-in to begin your Extravaganza Journey!</h3></div>
                     )}
-
                 </div>
 
                 {this.props.children}
-                {/* include grandchild components here */}
+                {/* include grandchild components here} */}
                 {this.renderChild()}
-
-                {/*
-                <div className="row">
-                    <Event_list login= {this.props.logIn} results={this.state.results} />
-                        
-                </div>
-                */}
                  
                 
                
