@@ -15,8 +15,10 @@ var MemcachedStore = require('connect-memcached')(session);
 // -------------------------------------------------------
 
 // Require Schema
+
 var Event = require("./models/Event");
 var User = require("./models/User");
+
 
 // Create Instance of Express
 var app = express();
@@ -64,6 +66,7 @@ db.once("open", function() {
 // ROUTES
 
 // Route to save a user to the database, but only if they're not already in there
+
 app.post("/api/user", function (req,res) {
 
     User.find({"email": req.body.email})
@@ -218,9 +221,12 @@ app.post("/api/user/database", function(req,res) {
      
 
 // any non API GET routes will be directed to our React app and handled by React router
+
 app.get("*", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
+
+
 // ----------------------------------------------------
 
 // Starting our express server

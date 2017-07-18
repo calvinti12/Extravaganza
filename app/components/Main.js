@@ -3,8 +3,10 @@ var helpers = require("../utils/helpers");
 var geolocator = require("geolocator");
 var Link = require("react-router").Link;
 
+
 var Saved = require("./children/Saved")
 var Search = require("./children/Search");
+
 var Modal = require("./Modal");
 
 import GoogleLogin from 'react-google-login';
