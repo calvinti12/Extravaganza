@@ -29,7 +29,9 @@ var Users_map = React.createClass({
     },
     componentDidMount: function() {
         console.log("Users_map component has mounted");
-        
+        if (!this.state.eventUsers.length) {
+            this.callDatabase();
+        }
     },
     componentDidUpdate: function() {
         if (!this.state.eventUsers.length) {
