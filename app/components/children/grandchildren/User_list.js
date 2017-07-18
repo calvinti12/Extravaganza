@@ -8,8 +8,8 @@ var helpers = require("../../../utils/helpers.js");
 var User_list = React.createClass({
     getInitialState: function() {
         return { 
-            userEvents: "",
-            eventUsers: ""
+            userEvents: [],
+            eventUsers: []
         };
     },
     callDatabase: function() {
@@ -19,7 +19,9 @@ var User_list = React.createClass({
             // eventResults contains the list of event IDs
             var events = eventResults.data[0].events;
             // create an empty array to push event data into from database
+            
             var userEvents = [];
+            
             // foor loop through the list of event Ids
             for(var i = 0; i < events.length; i++) {
                 // current event Id in for loop
@@ -28,24 +30,24 @@ var User_list = React.createClass({
                 helpers.getEventsById(eventId).then(function(eventByIdResults) {
                     // push result into userEvents array
                     userEvents.push(eventByIdResults.data[0]);
-                });
+                    if (userEvents.length === events.length) {
+                        // after all iterations, push userEvents array into state
+                        this.setState({ userEvents: userEvents });
+                    }   
+                }.bind(this));
             }
             console.log("userEvents Array is: ", userEvents);
-            // after all iterations, push userEvents array into state
-            this.setState({ userEvents: userEvents });
-            this.renderEvents();
+            
+            //this.componentDidUpdate();
         }.bind(this));
         
     },
     componentDidMount: function() {
         console.log("user_list component mounted");
         this.callDatabase();
-        this.renderEvents();
+        //this.renderEvents();
     },
-    componentDidUpdate: function() {
-        console.log("user_list component updated");
-        this.renderEvents();
-    },
+
     handleClick: function(event) {
         console.log("clicked", event._id);
         var eventId = event._id;
@@ -56,13 +58,25 @@ var User_list = React.createClass({
         }.bind(this));
     },
     renderEvents: function() {
-        
-        if (this.state.userEvents.length) {
+        console.log('render events called');
+        if (this.state.userEvents !== "" && this.state.userEvents.length) {
+            console.log("renderEvents in user_list fired");
             return this.state.userEvents.map(function(event, index) {
+                console.log("im in the map");
                 return (
                     <div key={index} className="user-events" onClick={() => this.handleClick(event)}>
                         <li className="list-group-item">
-                            <p>{event.eventName}</p>
+                            <div className="row">
+                                <div className="col-sm-6">
+                                    <p>{event.eventName}</p>
+                                </div>
+                                <div className="col-sm-3">
+                                    <p>{event.venueName}</p>
+                                </div>
+                                <div className="col-sm-3">
+                                    <p>{event.eventDate}</p>
+                                </div>
+                            </div>
                         </li>
                     </div>
                 );
@@ -77,6 +91,7 @@ var User_list = React.createClass({
         }
     },
     render: function() {
+        console.log("render in user_list");
         return (
             <div className="container">
                 <div className="row">
@@ -85,7 +100,6 @@ var User_list = React.createClass({
                             <h3 className="panel-title"> Saved Events </h3>
                         </div>
                         <div className="panel-body">
-                            {/* User's saved events render here */}
                             {this.renderEvents()}
                         </div>
                     </div>

@@ -8,7 +8,7 @@ var locations = [];
 var Users_map = React.createClass({
     getInitialState: function() {
         return { 
-            eventUsers: ""
+            eventUsers: []
         };
     },
     callDatabase: function() {
@@ -18,21 +18,30 @@ var Users_map = React.createClass({
             var userMongoId = passedUsers[i];
             helpers.getUserEvents(userMongoId).then(function(userResults) {
                 eventUsers.push(userResults.data[0]);
-            });
+                console.log("eventuser state is " + eventUsers.length + " and passedUsers is " + passedUsers.length);
+                if (eventUsers.length === this.props.eventUsers.length) {
+                    console.log("user_maps state updated");
+                    this.setState({ eventUsers: eventUsers });
+                }
+            }.bind(this));
         }
-        this.setState({ eventUsers: eventUsers });
+        //this.setState({ eventUsers: eventUsers });
     },
     componentDidMount: function() {
         console.log("Users_map component has mounted");
-        this.callDatabase();
+        
     },
     componentDidUpdate: function() {
+        if (!this.state.eventUsers.length) {
+            this.callDatabase();
+        }
         console.log("Event map component has updated");
         locations = [];
         // use for loop to go through user locations and push them to locations array
-        if (this.state.eventUsers !== "") {
+        if (this.state.eventUsers.length) {
             for (var i = 0; i < this.state.eventUsers.length; i++) {
                 var userLoc = {
+                    name: this.state.eventUsers[i].first,
                     lat: parseFloat(this.state.eventUsers[i].lat),
                     lng: parseFloat(this.state.eventUsers[i].lon)
                 }
@@ -45,7 +54,7 @@ var Users_map = React.createClass({
         
     },
     initMap: function() {
-
+        console.log("users_map initMap called with locations: ", locations);
         var labels = '1234567890';
         var labelIndex = 0;
 
@@ -59,7 +68,7 @@ var Users_map = React.createClass({
 
         var marker, i;
 
-        for (i = 0; i < locations.length; i++) {  
+        for (i = 0; i < locations.length; i++) { 
           marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
             label: labels[labelIndex++ % labels.length],
@@ -77,13 +86,22 @@ var Users_map = React.createClass({
     
     },
     renderUsers: function() {
-        
-        if (this.state.eventUsers.length) {
+        console.log("render users in users map");
+        if (this.state.eventUsers !== "" && this.state.eventUsers.length) {
+            console.log("render users in users map fired (true)");
             return this.state.eventUsers.map(function(user, index) {
+                console.log("in users_map map function");
                 return (
                     <div key={index}>
                         <li className="list-group-item">
-                            <p>{user.first}</p>
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <img src={user.picture} />
+                                
+                                    <p>Name: {user.first}</p>
+                                    <p>Email: {user.email}</p>
+                                </div>
+                            </div>
                         </li>
                     </div>
                 );

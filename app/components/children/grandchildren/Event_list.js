@@ -59,6 +59,7 @@ var Event_list = React.createClass({
           eventID: event.id,
           eventName: event.title,
           eventDate: event.datetime_local,
+          venueName: event.venue.name,
           venueAddress: event.venue.address,
           venueLocation: event.venue.display_location,
           users: this.props.data.userMongo
