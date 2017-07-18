@@ -23,7 +23,8 @@
   },
   "scripts": {
     "build": "webpack --config ./webpack.config.js --progress --colors",
-    "start": "webpack -w & node server.js",
+    "start": "node server.js",
+    "starts": "webpack -w & node server.js",
     "postinstall": "npm run build"
   },
   "repository": {
