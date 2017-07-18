@@ -98,7 +98,14 @@ var Users_map = React.createClass({
                         <li className="list-group-item">
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <img src={user.picture} />
+                                    <div className="row">
+                                        <div className="col-sm-10">
+                                            <img src={user.picture} />
+                                        </div>
+                                        <div className="col-sm-2">
+                                            <span className="badge badge-default badge-pill">{index+1}</span>
+                                        </div>
+                                    </div>
                                 
                                     <p>Name: {user.first}</p>
                                     <p>Email: {user.email}</p>
