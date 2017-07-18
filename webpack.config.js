@@ -11,15 +11,6 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.(jpg|png|svg)$/,
-        use:  {
-          loader: "file-loader",
-          query: {
-            name: "./public/img/[name].[ext]"
-          }
-        }
-      },
-      {
         // Only working with files that in in a .js or .jsx extension
         test: /\.jsx?$/, 
         // Webpack will only process files in our app folder. This avoids processing
