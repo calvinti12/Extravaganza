@@ -53,7 +53,16 @@ var User_list = React.createClass({
         var eventId = event._id;
         helpers.getEventsById(eventId).then(function(eventByIdResults) {
             var eventUsers = eventByIdResults.data[0].users;
-            console.log("eventUsers is ", eventUsers);
+            console.log("eventUsers pre splice is ", eventUsers);
+            var currentUser = this.props.data.userMongo;
+            var currentUserIndex;
+            for (var i = 0; i < eventUsers.length; i++) {
+                if (currentUser === eventUsers[i]) {
+                    currentUserIndex = i;
+                }
+            }
+            eventUsers.splice(currentUserIndex);
+            console.log("eventUsers post splice is ", eventUsers);
             this.setState({ eventUsers: eventUsers });
         }.bind(this));
     },
