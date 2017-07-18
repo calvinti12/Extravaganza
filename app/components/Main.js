@@ -222,11 +222,15 @@ handleUser: function() {
 
                 <div className = "container-fluid"> 
                   <div className="jumbotron">
-               
-                  <h1>Welcome to ShuttleExtravaganza!</h1>
-                  <p>Search for rideshare buddies who are going to the same events</p>
-                  <img src="/img/mysteryMachine.png"/>
-    
+                    <div className="row">
+                        <div className="col-sm-8">
+                          <h1>Welcome to ShuttleExtravaganza!</h1>
+                          <p>Search for rideshare buddies who are going to the same events</p>
+                        </div>
+                        <div className="col-sm-4">
+                          <img src="/img/mysteryMachine.png"/>
+                        </div>
+                    </div>
                   </div>
                 </div>
 

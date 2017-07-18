@@ -6,6 +6,18 @@
   font-family: 'Rakoon';
   src: local('Rakoon'), url(../fonts/Rakoon_PersonalUse.ttf) format('ttf');
 }*/
+.custom {
+  cursor: url('../img/flower.png'), auto;
+  height: 100px;
+}
+
+body {
+   /*background-color: yellow; */
+  /* Visual */
+  /*background-image: url('../img/disco.png');*/
+  width: 100%;
+  height: 30%;
+}
 
 
 .jumbotron {
@@ -13,15 +25,14 @@
     height: 350px;
     color: #6f7178;
     text-shadow: #6cc3c8 0.3em 0.3em 0.3em;
-    background-image: : url('img/mysteryMachine.png');
     background: transparent;
     /*font-family: 'Gorditas', cursive, bold;*/
-    /*font-family: 'Spicy Rice', cursive, bold;*/
-    font-family: 'Modak', cursive, bold;
+    font-family: 'Spicy Rice', cursive, bold;
+    /*font-family: 'Modak', cursive, bold;*/
 }
 
 .jumbotron img {
-    height:200px;
+    height:350px;
     float:right;
 }
 
@@ -42,11 +53,29 @@
 #event-results {
     max-height: 430px;
 }
+
+div#event-results.panel-body{
+    background-image: url('../img/Audience.jpg');
+    background-size: 930px 435px;
+    filter: opacity(30%);
+    background-repeat: no-repeat;
+}
+
 #ul-event-results {
     height: 400px;
     overflow: hidden;
     overflow-y: scroll;
 }
+
+ul.#ul-event-results.list-group {
+    filter: none;
+}
+
+/*li.list-group-item{
+    filter: none;
+}*/
+
+
 #event-users {
     max-height: 430px;
 }
@@ -63,18 +92,20 @@
 #display.false {
     display: none;
 }
-<<<<<<< HEAD
 
 .userReminder h3{
     font-family: 'Gorditas', cursive;
     float: right;
+    color: #6f7178;
 }
 
 div.panel-heading {
     font-family: 'Gorditas';
-    border-color: #7cbf4d;
-    color: #6cc3c8;
-    background: transparent;
+
+}
+
+div.panel-body {
+    font-family: 'Gorditas';
 }
 .user-events {
     padding: 5px 0px 5px 0px;
@@ -83,3 +114,14 @@ div.panel-heading {
     box-shadow: 5px 5px 5px #888888;
 
 }
+
+/*.listBackground{
+    background-image: url('../img/Audience.jpg');
+}
+*/
+/*div#event-results.panel-body{
+    background-image: url('../img/Audience.jpg');
+    height: 100%;
+}*/
+
+/*background-image: url('../img/disco.png');*/
