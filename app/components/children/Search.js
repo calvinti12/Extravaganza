@@ -46,7 +46,30 @@ var Search = React.createClass({
         helpers.getSeatgeekGenre(this.state.selectedOption, this.state.startDate, this.state.endDate)
 
             .then(function(data){
-
+                for (var i = 0; i < data.length; i++) {
+                    var event = data[i];
+                    // handles dates to change with moment.js - work in progress
+                    var uglyDateTime = event.datetime_local;
+                    //var uglyDate = uglyDateTime.slice(0, 10);
+                    //var uglyTime = uglyDateTime.slice(11, 19);
+                    var uglyHour = Number(uglyDateTime.substr(11, 2));
+                    var minutes = uglyDateTime.substr(13, 3);
+                    var year = uglyDateTime.substr(0, 4);
+                    var date = uglyDateTime.substr(5, 5);
+                    var hour = "";
+                    var ampm = "";
+                    if (uglyHour > 12) {
+                        hour = (uglyHour - 12).toString();
+                        ampm = " PM"
+                    } else {
+                        hour = uglryHour.toString();
+                        ampm = " AM"
+                    }
+                    var DateTime = date + "-" + year + " at " + hour + minutes + ampm;
+                    event["datetime_local"] = DateTime;
+                    console.log(DateTime);
+                }
+                console.log("search data object with new datetimes ", data);
                 this.setState({results: {events: data}})
 
             }.bind(this))

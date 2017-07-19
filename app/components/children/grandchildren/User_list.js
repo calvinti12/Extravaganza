@@ -14,7 +14,7 @@ var User_list = React.createClass({
     },
     callDatabase: function() {
         var userMongoId = this.props.data.userMongo;
-        console.log("Database called with userId: " + userMongoId);
+
         helpers.getUserEvents(userMongoId).then(function(eventResults) {
             // eventResults contains the list of event IDs
             var events = eventResults.data[0].events;
@@ -35,25 +35,19 @@ var User_list = React.createClass({
                         this.setState({ userEvents: userEvents });
                     }   
                 }.bind(this));
-            }
-            console.log("userEvents Array is: ", userEvents);
-            
-            //this.componentDidUpdate();
+            }            
         }.bind(this));
         
     },
     componentDidMount: function() {
-        console.log("user_list component mounted");
         this.callDatabase();
-        //this.renderEvents();
     },
 
     handleClick: function(event) {
-        console.log("clicked", event._id);
+        // console.log("clicked", event._id);
         var eventId = event._id;
         helpers.getEventsById(eventId).then(function(eventByIdResults) {
             var eventUsers = eventByIdResults.data[0].users;
-            console.log("eventUsers pre splice is ", eventUsers);
             var currentUser = this.props.data.userMongo;
             var currentUserIndex;
             for (var i = 0; i < eventUsers.length; i++) {
@@ -69,9 +63,7 @@ var User_list = React.createClass({
     renderEvents: function() {
         console.log('render events called');
         if (this.state.userEvents !== "" && this.state.userEvents.length) {
-            console.log("renderEvents in user_list fired");
             return this.state.userEvents.map(function(event, index) {
-                console.log("im in the map");
                 return (
                     <div key={index} className="user-events" onClick={() => this.handleClick(event)}>
                         <li className="list-group-item">
@@ -80,11 +72,11 @@ var User_list = React.createClass({
                                     <p>{event.eventName}</p>
                                     <p><small> ...at {event.venueName} </small></p>
                                 </div>
-                                <div className="col-sm-3">
+                                <div className="col-sm-4">
                                     <p>{event.eventDate}</p>
                                 </div>
-                                <div className="col-sm-3">
-                                    
+                                <div className="col-sm-2">
+                                
                                 </div>
                             </div>
                         </li>
@@ -98,10 +90,13 @@ var User_list = React.createClass({
             return (
                 <Users_map eventUsers={this.state.eventUsers} />
             );
+        } else {
+            return (
+                <h4><em> None of these events have attendees... </em></h4>
+            );
         }
     },
     render: function() {
-        console.log("render in user_list");
         return (
             <div className="container">
                 <div className="row">
@@ -109,8 +104,10 @@ var User_list = React.createClass({
                         <div className="panel-heading">
                             <h3 className="panel-title"> Saved Events </h3>
                         </div>
-                        <div className="panel-body">
-                            {this.renderEvents()}
+                        <div className="panel-body" id="user-events">
+                            <ul className="list-group" id="ul-user-events">
+                                {this.renderEvents()}
+                            </ul>
                         </div>
                     </div>
                 </div>

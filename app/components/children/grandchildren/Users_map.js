@@ -25,10 +25,8 @@ var Users_map = React.createClass({
                 }
             }.bind(this));
         }
-        //this.setState({ eventUsers: eventUsers });
     },
     componentDidMount: function() {
-        console.log("Users_map component has mounted");
         if (!this.state.eventUsers.length) {
             this.callDatabase();
         }
@@ -37,7 +35,6 @@ var Users_map = React.createClass({
         if (!this.state.eventUsers.length) {
             this.callDatabase();
         }
-        console.log("Event map component has updated");
         locations = [];
         // use for loop to go through user locations and push them to locations array
         if (this.state.eventUsers.length) {
@@ -49,14 +46,13 @@ var Users_map = React.createClass({
                 }
                 locations.push(userLoc);
             }
-            console.log("users_map locations", locations);
+
             this.initMap();
 
         }
         
     },
     initMap: function() {
-        console.log("users_map initMap called with locations: ", locations);
         var labels = '1234567890';
         var labelIndex = 0;
 
@@ -88,11 +84,8 @@ var Users_map = React.createClass({
     
     },
     renderUsers: function() {
-        console.log("render users in users map");
         if (this.state.eventUsers !== "" && this.state.eventUsers.length) {
-            console.log("render users in users map fired (true)");
             return this.state.eventUsers.map(function(user, index) {
-                console.log("in users_map map function");
                 return (
                     <div key={index}>
                         <li className="list-group-item">

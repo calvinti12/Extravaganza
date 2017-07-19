@@ -10,7 +10,7 @@ var SeatgeekSchema = new Schema({
     type: String
   },
   eventDate: {
-    type: Date
+    type: String
   },
   venueName: {
     type: String

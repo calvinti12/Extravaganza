@@ -61,7 +61,6 @@ body {
     overflow-y: scroll;
 }
 
-
 #event-users {
     max-height: 430px;
 }
@@ -69,6 +68,18 @@ body {
     height: 400px;
     overflow: hidden;
     overflow-y: scroll;
+}
+#user-events {
+    max-height: 400px;
+}
+#ul-user-events {
+    height: 370px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.badge-pill {
+    background-color: #fa594b;
 }
 
 #display.true {

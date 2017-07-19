@@ -13,7 +13,6 @@ var Event_list = React.createClass({
         }
     },
     componentDidUpdate: function() {
-        console.log("Event map component has updated");
         locations = [];
 
         if(this.props.results.events) {
@@ -27,12 +26,6 @@ var Event_list = React.createClass({
                 venueLocation["lat"] = venueLat;
                 venueLocation["lng"] = venueLng;
                 locations.push(venueLocation);
-
-                // handles dates to change with moment.js - work in progress
-                // var uglyDateTime = this.props.results.events[i].datetime_local;
-                // var uglyDate = uglyDateTime.slice(0, 10);
-                // var uglyTime = uglyDateTime.slice(11, 19);
-                // console.log("ugly", uglyDate, uglyTime);
             }
 
         // initializes the map once the for loop has finished pulling geolocations from props
@@ -43,7 +36,6 @@ var Event_list = React.createClass({
     },
 
     saveEventOnUser: function (eventId) {
-        console.log("user ID:" + this.props.data.userMongo);
         var userMongoId = this.props.data.userMongo; 
         var eventId = eventId;
         helpers.saveEventToUser(userMongoId, eventId)
@@ -66,16 +58,11 @@ var Event_list = React.createClass({
           users: this.props.data.userMongo
         };
 
-        console.log(newEvent);
-
         var user = this.props.data.userMongo; 
 
         helpers.postSaved(newEvent, user)
         .then(function(response) {
-            console.log("postSaved ran", event.title);  
-            console.log(response);
             // return response.data._id;
-            console.log("I am the response data id: " + response.data._id);
             this.saveEventOnUser(response.data._id);
            
         }.bind(this));
