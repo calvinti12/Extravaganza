@@ -67,6 +67,16 @@ modalCheck: function() {
       if (res.data[0]._id) {
        
         this.toggleModal(); 
+
+        this.setState({
+          userStreet: res.data[0].street,
+          userCity: res.data[0].city,
+          userState: res.data[0].state,
+          userZip: res.data[0].zip,
+          userLat: res.data[0].lat,
+          userLon: res.data[0].lon,
+          userMongo: res.data[0]._id
+        });
       }
     }.bind(this)); 
 },
