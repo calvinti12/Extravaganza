@@ -60,7 +60,7 @@ var Search = React.createClass({
                         hour = (uglyHour - 12).toString();
                         ampm = " PM"
                     } else {
-                        hour = uglryHour.toString();
+                        hour = uglyHour.toString();
                         ampm = " AM"
                     }
                     var DateTime = date + "-" + year + " at " + hour + minutes + ampm;
