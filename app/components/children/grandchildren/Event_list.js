@@ -40,8 +40,7 @@ var Event_list = React.createClass({
         var eventId = eventId;
         helpers.saveEventToUser(userMongoId, eventId)
             .then(function(response) {
-                console.log("event added to user");
-                console.log(response);
+                console.log("event added to user", response);
             }.bind(this));
 
     },

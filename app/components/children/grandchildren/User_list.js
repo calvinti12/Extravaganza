@@ -56,12 +56,10 @@ var User_list = React.createClass({
                 }
             }
             eventUsers.splice(currentUserIndex);
-            console.log("eventUsers post splice is ", eventUsers);
             this.setState({ eventUsers: eventUsers });
         }.bind(this));
     },
     renderEvents: function() {
-        console.log('render events called');
         if (this.state.userEvents !== "" && this.state.userEvents.length) {
             return this.state.userEvents.map(function(event, index) {
                 return (

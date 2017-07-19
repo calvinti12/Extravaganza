@@ -48,10 +48,8 @@ var Search = React.createClass({
             .then(function(data){
                 for (var i = 0; i < data.length; i++) {
                     var event = data[i];
-                    // handles dates to change with moment.js - work in progress
+                    // changes ugly datetime from API and pushes to state
                     var uglyDateTime = event.datetime_local;
-                    //var uglyDate = uglyDateTime.slice(0, 10);
-                    //var uglyTime = uglyDateTime.slice(11, 19);
                     var uglyHour = Number(uglyDateTime.substr(11, 2));
                     var minutes = uglyDateTime.substr(13, 3);
                     var year = uglyDateTime.substr(0, 4);
@@ -67,9 +65,7 @@ var Search = React.createClass({
                     }
                     var DateTime = date + "-" + year + " at " + hour + minutes + ampm;
                     event["datetime_local"] = DateTime;
-                    console.log(DateTime);
                 }
-                console.log("search data object with new datetimes ", data);
                 this.setState({results: {events: data}})
 
             }.bind(this))
