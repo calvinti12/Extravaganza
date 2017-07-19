@@ -51,8 +51,8 @@ app.use(session(sessionConfig));
 // ---------------------------------------------------------
 // MONGO 
 
-mongoose.connect("mongodb://localhost/extravaganza");
-// mongoose.connect("mongodb://heroku_vzjh23tg:jourgchon56a5cpp3mecgs45kn@ds139370.mlab.com:39370/heroku_vzjh23tg");
+// mongoose.connect("mongodb://localhost/extravaganza");
+mongoose.connect("mongodb://heroku_vzjh23tg:jourgchon56a5cpp3mecgs45kn@ds139370.mlab.com:39370/heroku_vzjh23tg");
 var db = mongoose.connection;
 
 db.on("error", function(err) {
