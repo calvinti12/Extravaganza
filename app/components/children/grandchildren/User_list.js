@@ -55,7 +55,7 @@ var User_list = React.createClass({
                     currentUserIndex = i;
                 }
             }
-            eventUsers.splice(currentUserIndex);
+            eventUsers.splice(currentUserIndex, 1);
             this.setState({ eventUsers: eventUsers });
         }.bind(this));
     },
