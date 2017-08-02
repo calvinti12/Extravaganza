@@ -1,3 +1,4 @@
+
 var React = require("react");
 
 var Users_map = require("./Users_map");
@@ -90,7 +91,7 @@ var User_list = React.createClass({
             );
         } else {
             return (
-                <h4><em> None of these events have attendees... </em></h4>
+                <div></div>
             );
         }
     },

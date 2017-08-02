@@ -89,7 +89,7 @@ var Search = React.createClass({
         if (this.state.showMap) {
             return (
                 <div className="row">
-                    <Event_list results={this.state.results} data={this.props} />}
+                    <Event_list results={this.state.results} data={this.props} />
                 </div>
             );
         }
